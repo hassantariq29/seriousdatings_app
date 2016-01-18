@@ -1,7 +1,7 @@
 <div class="sidebar clearfix">
   <div class="sidebar-nav navbar-collapse">
     <ul class="nav" id="side-menu">
-      <li class="active"><a href="dashboard.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a> </li>
+      <li class="active"><a href="{{ url('/') }}/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a> </li>
       <li> <a href="#"><i class="fa fa-file-image-o fa-fw"></i> Slide Management <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
         <li><a href="{{ url('/') }}/admin/slide">Manage slide</a></li>
@@ -51,13 +51,7 @@
         </ul>
         <!-- /.nav-second-level --> 
       </li>
-      <li> <a href="#"><i class="fa fa-edit fa-fw"></i> Banner Management<span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level">
-          <li> <a href="{{ url('/') }}/admin/banners">Manage Banner</a> </li>
-          <li> <a href="{{ url('/') }}/admin/banners/create">Add Banner</a> </li>
-        </ul>
-        <!-- /.nav-second-level --> 
-      </li>
+     
       <li> <a href="#"><i class="fa fa-edit fa-fw"></i>Dating Plan Management<span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
           <li> <a href="{{ url('/') }}/admin/dating_plans">Manage Plan</a> </li>
@@ -72,8 +66,8 @@
 		  <li> <a href="{{ url('/') }}/admin/pages/create">Add Website Content</a> </li>
          
         </ul>
-        <li> <a href="change-password.php"><i class="fa fa-sign-out fa-fw"></i> Change Password</a></li>
-      <li> <a href="index.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+        <li> <a href="{{ url('/') }}/admin/change_password"><i class="fa fa-sign-out fa-fw"></i> Change Password</a></li>
+      <li> <a href="{{ url('/') }}/admin/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
       <!-- /.nav-second-level -->
       </li>
     </ul>

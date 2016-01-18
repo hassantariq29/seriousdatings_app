@@ -55,15 +55,14 @@
 					<td>{!! date('d F, Y', strtotime($template->created_at)) !!} </td>
 					<td><div class="btn-group table-action"> <a class="btn btn-flickr btn-sm dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i> Action <span class="caret"></span> </a>
                         <ul role="menu" class="dropdown-menu">
-                          
                           <li><a href='templates/{!! $template->id !!}/edit'> <i class="fa fa-pencil"></i> Edit</a></li>
+						  <li><a href="templates/{!! $template->id !!}"> <i class="fa fa-eye"></i> View</a></li>
                           <li>
                               {!! Form::open(array('url' => 'admin/templates/' . $template->id, 'class' => '')) !!}
                                 {!! Form::hidden('_method', 'DELETE') !!}
                                 {!! Form::button('<i class="fa fa-trash-o"></i> Delete', array('type' => 'submit')) !!}
                              {!! Form::close() !!}
                           </li>
-                          
                         </ul>
                       </div></td>
                   </tr>
@@ -75,6 +74,25 @@
           </div>
         </div>
 	</div>
+	
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     <div class="modal-header">
+        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+        <h4 id="myModalLabel" class="modal-title">{!! $template->template_name !!} Preview</h4>
+      </div>
+      <div class="modal-body">
+        <div class="embed-responsive embed-responsive-16by9">
+			<iframe src="templates/{!! $template->id !!}/content" class="embed-responsive-item" id ="iframe_modal"></iframe>
+			 
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 @stop
+
 
    

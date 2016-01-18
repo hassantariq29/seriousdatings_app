@@ -4,14 +4,14 @@
       <!-- end: SPANEL CONFIGURATION MODAL FORM -->
       
           <div class="page-header">
-            <h3>Add Slide  <a href="{!! url() !!}/admin/slide" class="pull-right btn btn-facebook btn-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp; Manage Slide</a></h3>
+            <h3>Add Gift Card  <a href="{!! url() !!}/admin/gift_cards" class="pull-right btn btn-facebook btn-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp; Manage Gift Card</a></h3>
           </div>
         
       </div>
 	  {!! Form::open
 			(
 				array(
-				'url' 		=> 'admin/slide',
+				'url' 		=> 'admin/gift_cards',
 				'method' 	=> 'post',
 				'files' 	=> true,
 				'role' 		=> 'form',
@@ -23,42 +23,42 @@
       <div class="">
           <div class="successHandler alert alert-success no-display alert-dismissible fade in">
             <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
-            <strong>Your detail has been submitted!</strong>Thank you </div>
+            <strong>You have some form errors!</strong> Please check below. </div>
           <div class="errorHandler alert alert-danger no-display alert-dismissible fade in">
             <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
             <strong>You have some form errors!</strong> Please check below. </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Title <span class="symbol required"></span></label>
+          <label class="col-sm-2 control-label">Gift Name<span class="symbol required"></span></label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"   placeholder="Enter your title" name="titlename" required >
+            <input type="text" class="form-control"  placeholder="Enter your Gift Name"  name= "name" required >
           </div>
         </div>
+        
+        
         <div class="form-group">
-          <label class="col-sm-2 control-label">Link <span class="symbol required"></span></label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" id="" placeholder="www.exaple.com" name="slidelink" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Upload Image <span class="symbol required"></span></label>
-          <div class="col-sm-9">
+          <label class="col-sm-2 control-label">Gift Picture <span class="symbol required"></span></label>
+          <div class="col-sm-3">
             <div class="file-upload">
-                <input type="file" class="file-input ImgeInput" id="uploadpicture" accept="image/*" name="uploadpicture" required />
-                 {!! HTML::image('images/targetImage.png', 'alt', array( 'class' => 'targetImage', 'name' => 'uploadpicture')) !!}
+                <input type="file" class="file-input ImgeInput" name="uploadpicture"  required/>
+				
+				{!! HTML::image('images/targetImage.png', 'alt', array( 'class' => 'targetImage')) !!}
+				<div class="img">File size should be 686 x 547</div>
              </div>
           
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Description</label>
+          <label class="col-sm-2 control-label">Gift Price<span class="symbol required"></span></label>
           <div class="col-sm-9">
-            <textarea  class="form-control summernote" name="description"></textarea>
+            <input type="text" class="form-control"  placeholder="Enter your gift price" name="price" required >
           </div>
         </div>
+        
+        
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <input type="submit" value="Submit" class="btn btn-success">
+            <input type="submit" value="Save" class="btn btn-success">
             <input type="button" value="Cancel" class="btn btn-danger">
           </div>
         </div>

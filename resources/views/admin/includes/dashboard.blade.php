@@ -7,6 +7,18 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Serious Dating |</title>
+<!-- jQuery --> 
+{!! HTML::script('plugins/jquery/jquery.min.js') !!}
+<!-- Bootstrap Core JavaScript --> 
+{!! HTML::script('js/bootstrap.min.js') !!}
+<!-- Metis Menu Plugin JavaScript --> 
+{!! HTML::script('plugins/metisMenu/dist/metisMenu.js') !!}
+{!! HTML::script('plugins/summernote/summernote.min.js') !!}
+<!-- Custom Theme JavaScript --> 
+{!! HTML::script('plugins/perfect-scrollbar/jquery.mousewheel.js') !!}
+{!! HTML::script('plugins/perfect-scrollbar/perfect-scrollbar.js') !!}
+{!! HTML::script('js/admin.js') !!}
+
 <!-- Bootstrap Core CSS -->
 {!! HTML::style('css/bootstrap.css') !!}
 <!-- dashboard  CSS -->
@@ -24,6 +36,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <body class="admin-body">
 <div id="wrapper">
@@ -38,42 +51,11 @@
 <!-- /#wrapper --> 
 </div>
 
-<!-- jQuery --> 
-{!! HTML::script('plugins/jquery/jquery.min.js') !!}
-{!! HTML::script('plugins/jquery/jquery.easing.min.js') !!}
-<!-- Bootstrap Core JavaScript --> 
-{!! HTML::script('js/bootstrap.min.js') !!}
-<!-- Metis Menu Plugin JavaScript --> 
-{!! HTML::script('plugins/metisMenu/dist/metisMenu.js') !!}
-<!-- fullcalendar --> 
-<!-- flot chart --> 
-{!! HTML::script('plugins/flot/excanvas.js') !!}
-{!! HTML::script('plugins/flot/jquery.flot.js') !!}
-{!! HTML::script('plugins/flot/jquery.flot.pie.js') !!}
-{!! HTML::script('plugins/flot/jquery.flot.resize.js') !!}
-{!! HTML::script('plugins/flot/jquery.flot.time.js') !!}
-{!! HTML::script('plugins/flot.tooltip/js/jquery.flot.tooltip.min.js') !!}
-<!-- raphael chart --> 
-{!! HTML::script('plugins/raphael/raphael-min.js') !!}
-{!! HTML::script('plugins/morrisjs/morris.min.js') !!}
-{!! HTML::script('plugins/easypiechart/jquery.easypiechart.min.js') !!}
-<!-- raphael chart --> 
-{!! HTML::script('js/flot-data.js') !!}
-{!! HTML::script('js/morris-data.js') !!}
-{!! HTML::script('js/dashboard.js') !!}
-{!! HTML::script('js/admin.js') !!}
-<!-- Custom Theme JavaScript -->
-<!-- jQuery --> 
-{!! HTML::script('plugins/jquery/jquery.min.js') !!}
-<!-- Bootstrap Core JavaScript --> 
-{!! HTML::script('js/bootstrap.min.js') !!}
-<!-- Metis Menu Plugin JavaScript --> 
-{!! HTML::script('plugins/metisMenu/dist/metisMenu.js') !!}
-{!! HTML::script('plugins/summernote/summernote.min.js') !!}
-<!-- Custom Theme JavaScript --> 
-{!! HTML::script('js/admin.js') !!}
+
 <script>
-jQuery(document).ready(function(){$('.summernote').summernote({
+jQuery(document).ready(function(){
+siteDashBoard.init();
+$('.summernote').summernote({
 	  height: 200,   //set editable area's height
 	});
 });

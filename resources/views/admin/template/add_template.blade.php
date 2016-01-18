@@ -1,17 +1,17 @@
-@extends('admin.dashboard')
+@extends('admin.includes.dashboard')
 	@section('content')
         <div class="main-content"> 
       <!-- end: SPANEL CONFIGURATION MODAL FORM -->
       
           <div class="page-header">
-            <h3>Add Slide  <a href="{!! url() !!}/admin/slide" class="pull-right btn btn-facebook btn-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp; Manage Slide</a></h3>
+            <h3>Add Template  <a href="{!! url() !!}/admin/templates" class="pull-right btn btn-facebook btn-sm" type="button"><i class="fa fa-plus-square"></i>&nbsp; Manage template</a></h3>
           </div>
         
       </div>
 	  {!! Form::open
 			(
 				array(
-				'url' 		=> 'admin/slide',
+				'url' 		=> 'admin/templates',
 				'method' 	=> 'post',
 				'files' 	=> true,
 				'role' 		=> 'form',
@@ -19,47 +19,43 @@
 				)
 			)
 	  !!}
-      <div class="form-horizontal">
-      <div class="">
+       <div class="form-horizontal">
+        <div class="">
           <div class="successHandler alert alert-success no-display alert-dismissible fade in">
             <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
-            <strong>Your detail has been submitted!</strong>Thank you </div>
+            <strong>You have some form errors!</strong> Please check below. </div>
           <div class="errorHandler alert alert-danger no-display alert-dismissible fade in">
             <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
             <strong>You have some form errors!</strong> Please check below. </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Title <span class="symbol required"></span></label>
+          <label class="col-sm-2 control-label">Template Name <span class="symbol required"></span></label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"   placeholder="Enter your title" name="titlename" required >
+            <input type="text" class="form-control"  placeholder="Template Name" name="template_name" required>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Link <span class="symbol required"></span></label>
+          <label class="col-sm-2 control-label">Subject <span class="symbol required"></span></label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="" placeholder="www.exaple.com" name="slidelink" required>
+            <input type="text" class="form-control"  placeholder="Enter Subject" name="template_subject" required>
           </div>
         </div>
+        
+        
         <div class="form-group">
-          <label class="col-sm-2 control-label">Upload Image <span class="symbol required"></span></label>
+          <label class="col-sm-2 control-label">Content<span class="symbol required"></span></label>
           <div class="col-sm-9">
-            <div class="file-upload">
-                <input type="file" class="file-input ImgeInput" id="uploadpicture" accept="image/*" name="uploadpicture" required />
-                 {!! HTML::image('images/targetImage.png', 'alt', array( 'class' => 'targetImage', 'name' => 'uploadpicture')) !!}
-             </div>
-          
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Description</label>
-          <div class="col-sm-9">
-            <textarea  class="form-control summernote" name="description"></textarea>
+            <textarea  class="form-control summernote" id="description" name="template_content" >
+				@include('admin.includes.sample_template')
+			
+			
+            </textarea>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <input type="submit" value="Submit" class="btn btn-success">
-            <input type="button" value="Cancel" class="btn btn-danger">
+            <input type="submit" value="Save" id="Submit" class="btn btn-success">
+            <input type="button" value="Cancel" id="Cancel" class="btn btn-danger">
           </div>
         </div>
       </div>
