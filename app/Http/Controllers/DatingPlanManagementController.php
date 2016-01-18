@@ -20,8 +20,8 @@ class DatingPlanManagementController extends Controller
         if ($datingPlans === null) {
             $datingPlans = null;
 		}
-		return $datingPlans;
-        // return \View::make('admin.manage_datingPlans')->withDatingPlans($datingPlans);
+	   //return $datingPlans;
+       return \View::make('admin.dating_plan.manage_dating')->withPlans($datingPlans);
     }
 
     /**
@@ -31,7 +31,7 @@ class DatingPlanManagementController extends Controller
      */
     public function create()
     {
-        //return \View::make('admin.add_datingPlan');
+        return \View::make('admin.dating_plan.add_dating');
     }
 
     /**
@@ -69,7 +69,7 @@ class DatingPlanManagementController extends Controller
     public function show($id)
     {
          $datingPlan = DatingPlan::find($id);
-        //return \View::make('admin.view_dating_plan')->withDatingPlan($datingPlan);
+       // return \View::make('admin.dating_plan.view_dating_plan')->withDatingPlan($datingPlan);
     }
 
     /**
@@ -81,7 +81,7 @@ class DatingPlanManagementController extends Controller
     public function edit($id)
     {
         $datingPlan = DatingPlan::find($id);
-        //return \View::make('admin.edit_dating_plan')->withDatingPlan($datingPlan);
+        return \View::make('admin.dating_plan.edit_dating')->withPlan($datingPlan);
     }
 
     /**

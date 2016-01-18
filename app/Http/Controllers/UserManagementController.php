@@ -20,8 +20,8 @@ class UserManagementController extends Controller
         if ($users === null) {
             $users = null;
 		}
-		return $users;
-        // return \View::make('admin.manage_users')->withUsers($users);
+		//return $users;
+         return \View::make('admin.user.manage_user')->withUsers($users);
     }
 
     /**
@@ -54,7 +54,7 @@ class UserManagementController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        //return \View::make('admin.view_user')->withUser($user);
+        return \View::make('admin.user.view_user')->withUser($user);
     }
 
     /**

@@ -29,7 +29,7 @@ class Event extends Model implements AuthenticatableContract, CanResetPasswordCo
      *
      * @var array
      */
-    protected $fillable = ['title', 'fromDate', 'toDate','addDate','description','location','ageFrom','ageTo','image'];
+    protected $fillable = ['title', 'fromDate', 'toDate','addDate','description','location','ageFrom','ageTo','image','charge'];
 
     /**
      * The attributes excluded from the model's JSON form.

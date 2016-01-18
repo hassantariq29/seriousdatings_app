@@ -11,7 +11,7 @@ class AdminDashboardController extends Controller {
 
     public function getIndex()
     {
-        return View::make('admin.dashboard');
+        return View::make('admin.includes.dashboard');
     }
 
 }

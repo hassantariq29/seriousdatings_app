@@ -20,8 +20,8 @@ class VideoManagementController extends Controller
         if ($videos === null) {
             $videos = null;
 		}
-		return $videos;
-        // return \View::make('admin.manage_videos')->withVideos($videos);
+		//return $videos;
+         return \View::make('admin.video.manage_videos')->withVideos($videos);
     }
 
     /**
@@ -31,7 +31,7 @@ class VideoManagementController extends Controller
      */
     public function create()
     {
-        //return \View::make('admin.add_videos');
+        return \View::make('admin.video.add_videos');
     }
 
     /**
@@ -52,13 +52,17 @@ class VideoManagementController extends Controller
         
                 $validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
-                    return Redirect::to('admin/videos/create')
-                    ->withInput()
-                    ->witherrors($validator->messages());
-                $filname = \Input::file('uploadpicture')->getClientOriginalName();
+					//dd($_FILES);
+					//return $validator->messages();
+					//return \Redirect::to('admin/videos/create')
+                    //->withInput()
+                    //->witherrors($validator->messages());
+				$filename = "abc.mp4";
+				$filname = \Input::file('uploadpicture')->getClientOriginalName();
                 $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
-                \Input::file('uploadpicture')->move(base_path() . '/public/videos/admin/', $filname);
-                 $giftCard= GiftCard::create(array(
+                \Input::file('uploadpicture')->move(base_path() . '/public/videos/', $filname);
+				
+				$video= Video::create(array(
                     'title'          => \Input::get('title'),
                     'link'          => \Input::get('link'),
                     'video'         => $filname,
@@ -77,7 +81,7 @@ class VideoManagementController extends Controller
     public function show($id)
     {
          $video = Video::find($id);
-        //return \View::make('admin.view_video')->withVideo($video);
+        //return \View::make('admin.video.show_videos')->withVideo($video);
     }
 
     /**
@@ -89,7 +93,7 @@ class VideoManagementController extends Controller
     public function edit($id)
     {
         $video = Video::find($id);
-        //return \View::make('admin.edit_video')->withVideo($video);
+        return \View::make('admin.video.edit_video')->withVideo($video);
     }
 
     /**

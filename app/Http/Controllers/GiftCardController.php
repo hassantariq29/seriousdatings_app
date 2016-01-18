@@ -21,8 +21,8 @@ class GiftCardController extends Controller
         if ($giftCards === null) {
             $giftCards = null;
 		}
-		return $giftCards;
-        // return \View::make('admin.manage_giftCard')->withGiftCards($giftCards);
+		//return $giftCards;
+         return \View::make('admin.gift_card.manage_giftCard')->withCards($giftCards);
     }
 
     /**
@@ -32,7 +32,7 @@ class GiftCardController extends Controller
      */
     public function create()
     {
-        //return \View::make('admin.add_giftCard');
+        return \View::make('admin.gift_card..add_giftCard');
     }
 
     /**
@@ -44,7 +44,7 @@ class GiftCardController extends Controller
     public function store(Request $request)
     {
         //return 'form posted';
-        $rules = array(
+		$rules = array(
                 'name' 				=> 'required',
                 'uploadpicture'    	=> 'required',
                 'price' 			=> 'required'
@@ -52,7 +52,7 @@ class GiftCardController extends Controller
         
                 $validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
-                    return Redirect::to('admin/gift_cards/create')
+                 	return \Redirect::to('admin/gift_cards/create')
                     ->withInput()
                     ->witherrors($validator->messages());
                 $filname = \Input::file('uploadpicture')->getClientOriginalName();
@@ -76,7 +76,7 @@ class GiftCardController extends Controller
     public function show($id)
     {
          $giftCard = GiftCard::find($id);
-        //return \View::make('admin.view_gift_card')->withGiftCard($giftCard);
+        return \View::make('admin.gift_card.view_giftCard')->withCard($giftCard);
     }
 
     /**
@@ -88,7 +88,7 @@ class GiftCardController extends Controller
     public function edit($id)
     {
          $giftCard = GiftCard::find($id);
-        //return \View::make('admin.edit_gift_card')->withGiftCard($giftCard);
+        return \View::make('admin.gift_card.edit_giftCard')->withCard($giftCard);
     }
 
     /**

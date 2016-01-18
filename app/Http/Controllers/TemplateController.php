@@ -72,7 +72,7 @@ class TemplateController extends Controller
     public function show($id)
     {
         $template = Template::find($id);
-        return \View::make('admin.view.view_template')->withTemplate($template);
+        return \View::make('admin.template.view_template')->withTemplate($template);
     }
 
     /**
@@ -130,4 +130,10 @@ class TemplateController extends Controller
         \Session::flash('message', 'Successfully deleted the template!');
         return \Redirect::to('admin/templates');
     }
+	
+	public function showContent($id){
+		
+		$template = Template::find($id);
+        return \View::make('admin.template.content_template')->withTemplate($template);
+	}
 }

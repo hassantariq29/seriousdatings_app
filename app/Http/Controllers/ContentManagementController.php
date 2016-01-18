@@ -20,8 +20,8 @@ class ContentManagementController extends Controller
         if ($pages === null) {
             $pages = null;
 		}
-		return $pages;
-        // return \View::make('admin.manage_pages')->withPages($pages);
+		//return $pages;
+        return \View::make('admin.pages.manage_pages')->withPages($pages);
     }
 
     /**
@@ -31,7 +31,7 @@ class ContentManagementController extends Controller
      */
     public function create()
     {
-        //return \View::make('admin.add_pages');
+        return \View::make('admin.pages.add_pages');
     }
 
     /**
@@ -81,7 +81,7 @@ class ContentManagementController extends Controller
     public function edit($id)
     {
         $page = Pages::find($id);
-        //return \View::make('admin.edit_page')->withPage($page);
+        return \View::make('admin.pages.edit_pages')->withPage($page);
     }
 
     /**

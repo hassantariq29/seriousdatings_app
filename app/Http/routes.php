@@ -82,6 +82,15 @@ Route::controller('deploy','ServerController');
 Route::controller('users/{username}/compatability','CompatabilityController');
 Route::controller('users/{username}/verify','VerifyController');
 Route::group(array('before' => 'admin'), function() {
+	Route::get('admin/logout', function(){
+		\Auth::logout();
+        \Session::flush();
+        return \Redirect::guest('login');
+		
+	});
+	Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
+	Route::get('admin/change_password', 'ChangePasswordController@showForm');
+	Route::post('admin/change_password', 'ChangePasswordController@updatePassword');
 	Route::resource('admin/slide','SlideManagementController');
 	Route::resource('admin/events','EventManagementController');
 	Route::resource('admin/templates','TemplateController');
@@ -92,7 +101,6 @@ Route::group(array('before' => 'admin'), function() {
 	Route::resource('admin/dating_plans','DatingPlanManagementController');
 	Route::resource('admin/pages','ContentManagementController');
 	Route::controller('admin','AdminDashboardController');
-
 });
 Route::controller('/','HomeController');
 

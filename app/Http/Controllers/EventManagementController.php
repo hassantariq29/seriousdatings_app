@@ -21,7 +21,7 @@ class EventManagementController extends Controller
          if ($events === null) {
             $events = null;
         }
-         return \View::make('admin.manage_slide')->withSlides($events);
+         return \View::make('admin.event.manage_event')->withEvents($events);
     }
 
     /**
@@ -31,7 +31,7 @@ class EventManagementController extends Controller
      */
     public function create()
     {
-        return \View::make('admin.add_slide');
+        return \View::make('admin.event.add_event');
     }
 
     /**
@@ -44,27 +44,37 @@ class EventManagementController extends Controller
     {
         //return 'form posted';
         $rules = array(
-                'titlename' => 'required',
-                'slidelink'    => 'required',
-                'description' => 'required',
-                'uploadpicture' => 'required'
+                'title' => 'required',
+                'location'    => 'required',
+                'fromDate' => 'required',
+				'toDate' => 'required',
+				'fromAge' => 'required',
+				'toAge' => 'required',
+				'description' => 'required',
+				'price' => 'required',
+				'uploadpicture' => 'required'
                 );
-        
-                $validator = \Validator::make(\Input::all(),$rules);
+				$validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
-                    return Redirect::to('admin/slide/create')
+					//return ($validator->messages());
+                    return \Redirect::to('admin/events/create')
                     ->withInput()
                     ->witherrors($validator->messages());
                 $filname = \Input::file('uploadpicture')->getClientOriginalName();
                 $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
-                \Input::file('uploadpicture')->move(base_path() . '/public/images/slider/', $filname);
-                 $slider= Slider::create(array(
-                    'title'          => \Input::get('titlename'),
-                    'description'    => \Input::get('description'),
-                    'link'           => \Input::get('slidelink'),
-                    'image'          => $filname
+                \Input::file('uploadpicture')->move(base_path() . '/public/images/events/', $filname);
+                 $event= Event::create(array(
+                    'title'          => \Input::get('title'),
+					'location'          => \Input::get('location'),
+					'fromDate'          => \Input::get('fromDate'),
+					'toDate'          => \Input::get('toDate'),
+					'ageFrom'          => \Input::get('fromAge'),
+					'ageTo'          => \Input::get('toAge'),
+					'description'    => \Input::get('description'),
+					'charge'   		 => \Input::get('price'),
+					'image'          => $filname
                 ));
-                return \Redirect::to('admin/slide');
+                return \Redirect::to('admin/events');
     
     }
 
@@ -87,8 +97,8 @@ class EventManagementController extends Controller
      */
     public function edit($id)
     {
-        $slide = Slider::find($id);
-        return \View::make('admin.edit_slide')->withSlide($slide);
+        $event = Event::find($id);
+        return \View::make('admin.event.edit_event')->withEvent($event);
     }
 
     /**
@@ -100,30 +110,40 @@ class EventManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //return 'form posted';
+    //return 'form posted';
         $rules = array(
-                'titlename' => 'required',
-                'slidelink'    => 'required',
-                'description' => 'required',
-                'uploadpicture' => 'required'
+                'title' => 'required',
+                'location'    => 'required',
+                'fromDate' => 'required',
+				'toDate' => 'required',
+				'fromAge' => 'required',
+				'toAge' => 'required',
+				'description' => 'required',
+				'price' => 'required',
+				'uploadpicture' => 'required'
                 );
-        
-                $validator = \Validator::make(\Input::all(),$rules);
+				$validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
-                    return Redirect::to('admin/slide/'.$id.'/edit')
+					//return ($validator->messages());
+                    return \Redirect::to('admin/events/create')
                     ->withInput()
                     ->witherrors($validator->messages());
                 $filname = \Input::file('uploadpicture')->getClientOriginalName();
                 $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
-                \Input::file('uploadpicture')->move(base_path() . '/public/images/slider/', $filname);
-                $slide = Slider::find($id);
-                $slide->title = \Input::get('titlename');
-                $slide->description = \Input::get('description');
-                $slide->link = \Input::get('slidelink');
-                $slide->image = $filname;
-                $slide->save();
+                \Input::file('uploadpicture')->move(base_path() . '/public/images/events/', $filname);
+                $event = Event::find($id);
+                $event->title = \Input::get('title');
+                $event->location = \Input::get('location');
+				$event->fromDate = \Input::get('fromDate');
+				$event->toDate = \Input::get('toDate');
+				$event->ageFrom = \Input::get('fromAge');
+				$event->ageTo = \Input::get('toAge');
+				$event->description = \Input::get('description');
+				$event->charge = \Input::get('price');
+				$event->image = $filname;
+                $event->save();
                 \Session::flash('message', 'Successfully updated slide!');
-                return \Redirect::to('admin/slide');
+                return \Redirect::to('admin/events');
     }
 
     /**
@@ -134,10 +154,10 @@ class EventManagementController extends Controller
      */
     public function destroy($id)
     {
-       $slide = Slider::find($id);
-        $slide->delete();
+       $event = Event::find($id);
+        $event->delete();
         // redirect
         \Session::flash('message', 'Successfully deleted the slide!');
-        return \Redirect::to('admin/slide');
+        return \Redirect::to('admin/events');
     }
 }

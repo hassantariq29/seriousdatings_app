@@ -21,7 +21,7 @@ class SlideManagementController extends Controller
          if ($slides === null) {
             $slides = null;
         }
-         return \View::make('admin.manage_slide')->withSlides($slides);
+         return \View::make('admin.slide.manage_slide')->withSlides($slides);
     }
 
     /**
@@ -31,7 +31,7 @@ class SlideManagementController extends Controller
      */
     public function create()
     {
-        return \View::make('admin.add_slide');
+        return \View::make('admin.slide.add_slide');
     }
 
     /**
@@ -49,10 +49,9 @@ class SlideManagementController extends Controller
                 'description' => 'required',
                 'uploadpicture' => 'required'
                 );
-        
                 $validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
-                    return Redirect::to('admin/slide/create')
+					return Redirect::to('admin/slide/create')
                     ->withInput()
                     ->witherrors($validator->messages());
                 $filname = \Input::file('uploadpicture')->getClientOriginalName();
@@ -88,7 +87,7 @@ class SlideManagementController extends Controller
     public function edit($id)
     {
         $slide = Slider::find($id);
-        return \View::make('admin.edit_slide')->withSlide($slide);
+        return \View::make('admin.slide.edit_slide')->withSlide($slide);
     }
 
     /**
