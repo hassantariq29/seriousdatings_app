@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
+use App\Http\Controllers\Auth;
 
 class HomeController extends Controller
 {
@@ -66,6 +67,7 @@ class HomeController extends Controller
     			'username' => \Input::get('username'),
     			'password' => \Input::get('password')
     	);
+        //dd($cred);
 		if(\Auth::attempt($cred)){
     		return \Redirect::intended('/');
     	}else{

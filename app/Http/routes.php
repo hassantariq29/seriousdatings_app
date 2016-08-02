@@ -13,17 +13,19 @@
 
 Route::get('users/{username}/verify/{key}', function ($username, $key) {
 	
-		
-		$user_id = \DB::table('users')->where('username',$username)->pluck('id');
-		$db_key = \DB::table('users')->where('username',$username)->pluck('verify_key');
+
+  		$username_new = DB::table('users')->where('id',$username)->pluck('username');
+		$db_key = \DB::table('users')->where('id',$username)->pluck('verify_key');
+
 		if($db_key == $key){
-			$user = User::find($user_id);
-			$user->verified = 1;
-			$user->save();
-			return Redirect::to('users/'.$username.'/compatability')->with("is_verified",1);
+			DB::table('role_user')
+            ->where('user_id', $username)
+            ->update(['role_id' => 1]);
+          	return Redirect::to('login');
 		}
 		else{
-			return Redirect::to('users/'.$username.'/verify');
+			echo "Invalid Verification Key";
+			return Redirect::to('users/'.$username_new.'/verify');
 		}
 });
 
@@ -73,14 +75,46 @@ Route::get('/start', function()
     return 'Woohoo!';
 });
 
+Route::get('ajax', 'AjaxRequestController@getSearchType');
+Route::get('users/ajax/profile', 'AjaxRequestController@profileData');
+
+
+
 
 Route::resource('users','UsersController');
 Route::resource('users/{username}/about_your_date','AboutYourDateController');
 
 Route::controller('deploy','ServerController');
 
+Route::controller('search', 'SearchController');
+
+
+//::controller('ajax/{action?}/{type?}', 'AjaxRequestController@getSearchType');
+
 Route::controller('users/{username}/compatability','CompatabilityController');
 Route::controller('users/{username}/verify','VerifyController');
+Route::controller('users/{username}/photos','UserPublicPhotoController');
+Route::controller('users/{username}/videos','UserPublicVideoController');
+Route::controller('datingPlan/','DatingPlanController');
+
+
+Route::group(array('before' => 'profile'), function() {
+
+	Route::get('profile/logout', function(){
+		\Auth::logout();
+		\Session::flush();
+		return \Redirect::guest('/');
+
+	});
+	Route::resource('profile/photo','UserPhotoController');
+	Route::resource('profile/music','UserMusicController');
+	Route::resource('profile/video','UserVideoController');
+	Route::resource('profile/group','UserGroupController');
+	Route::controller('profile','ProfileController');
+
+
+});
+
 Route::group(array('before' => 'admin'), function() {
 	Route::get('admin/logout', function(){
 		\Auth::logout();
@@ -123,7 +157,17 @@ Route::controller('/','HomeController');
 
 
 
+Route::filter('profile', function()
+{
+	if (Auth::user())
+	{
+		$user = Auth::user();
 
+	}
+	else{
+		return \Redirect::guest('login');
+	}
+});
 
 
 Route::filter('admin', function()

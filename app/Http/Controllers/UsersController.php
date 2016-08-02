@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Input;
 use App\User;
-
+use DB;
+use Auth;
 class UsersController extends Controller 
 
 	
@@ -21,7 +22,7 @@ class UsersController extends Controller
     {
     	if(isset($_GET['email'])){ 
 	    	$email = $_GET['email'];
-	    	$result = DB::table('users')->where('email', $email)->get();
+	    	$result = \DB::table('users')->where('email', $email)->get();
 	    		if($result == null){
 	    			return '1';
 	    		}
@@ -34,14 +35,19 @@ class UsersController extends Controller
 
     public function create()
     {
-    	return View::make('signup_form');
+    	return View::make('signup');
         
     }
 
  	public function store()
     {
-	
-				$rules = array(
+
+
+
+
+
+
+            	$rules = array(
     			'username' => 'required | unique:users',
     			'email'	   => 'required | unique:users',
     			'password' => 'required | min:2',
@@ -54,13 +60,18 @@ class UsersController extends Controller
     			);
     	
     	$validator = \Validator::make(Input::all(),$rules);
-    	if($validator->fails())
-			return $validator->messages();
-			/*
-    		return \Redirect::to('users/create')
+    	if($validator->fails()) {
+			//return $validator->messages();
+			
+            \Session::flash('message', $validator->messages());
+           // return \Redirect::back();
+    		
+            return \Redirect::to('users/create')
     				->withInput()
     				->witherrors($validator->messages());
-			*/
+                    
+			
+		}
     	$filname = Input::file('photo')->getClientOriginalName();
     	$imageName = Input::file('photo')->getClientOriginalExtension();
     	Input::file('photo')->move(base_path() . '/public/images/users/'.Input::get('username').'/', $filname);
@@ -72,20 +83,38 @@ class UsersController extends Controller
     	$travel="";
     	$social_sitatuion = "";
     	
-    	//foreach ($movies as $movi ){$movie .= $movi.",";}
-    	//foreach ($travels as $travl ){$travel  .= $travl.",";}
-    	//foreach ($socials as $social ){$social_sitatuion .= $social.",";}
+    	foreach ($movies as $movi ){$movie .= $movi.",";}
+    	foreach ($travels as $travl ){$travel  .= $travl.",";}
+    	foreach ($socials as $social ){$social_sitatuion .= $social.",";}
     	
-    	$zipcode = 0;
+        $zipcode = 0;
+        $lati = 0;
+        $longi = 0;
     	$query = @unserialize(file_get_contents('http://ip-api.com/php/'));
+        // dd($query);
     	if($query && $query['status'] == 'success') {
     		$zipcode = $query['zip'];
+            $lati = $query['lat'];
+            $longi = $query['lon'];
     	}
-    	else{
+        else{
     		$zipcode = 0;
+            $lati = 0;
+            $longi = 0;
     	}
+        
+
+        //dd($lati." ".$longi);
     	$email_key = str_random(40);
-    	 $user= User::create(array(
+
+        $birthYear =  Input::get('birthYear');
+        $birthMonth =  Input::get('birthMonth');
+        $birthDay =  Input::get('birthDay');
+        $birthFrom = $birthYear."-".$birthMonth."-".$birthDay;
+        $to   = new \DateTime('today');
+        $age =  date_diff(date_create($birthFrom), date_create('today'))->y;
+
+        $user= User::create(array(
 		    'username'			=> Input::get('username'),
 			'password' 			=> \Hash::make(Input::get('password')),
 			'email' 			=> Input::get('email'),
@@ -95,10 +124,10 @@ class UsersController extends Controller
 			'profileType' 		=> '0',
 			'photo' 			=> $filname,
 			'photoType' 		=> Input::get('photoType'),
-			'role' 				=> '0',
+			'role' 				=> 'user',
 			'active' 			=> '0',
 			'online' 			=> '0',
-			'unsubscribe' 		=> '0',
+			'unsubscribe' 		=> '1',
 			'relationshipGoal' 	=> Input::get('relationshipGoal'),
 			'jobAndJobSchedule' 	=> Input::get('jobAndJobSchedule'),
 			'yourSocialSituation'	=>  $social_sitatuion,
@@ -132,16 +161,31 @@ class UsersController extends Controller
 			'movie' => $movie,
 			'travel' => $travel,
 			'gender' => Input::get('gender'),
-			'age' => Input::get('age'),
+			'age' => $age,
 			'zipcode' => $zipcode,
 			'tatoos' => Input::get('tatoos'),
 			'wantKids' => Input::get('wantKids'),
 			'relationshipStatus' => Input::get('relationshipStatus'),
-    	 	'verify_key'  =>  $email_key
+    	 	'verify_key'  =>  $email_key,
+            'fatherBorn'  =>  Input::get('fatherBorn'),
+            'motherBorn'  =>  Input::get('motherBorn'),
+            'latitude'  =>  $lati,
+            'longitude'  =>  $longi
+             
 		));
     	$lastInsertedId= $user->id;
+
     	\Session::set('verify_key', $email_key);
+
+        $id = \DB::table('role_user')->insertGetId(
+        ['user_id' => $lastInsertedId, 'role_id' => 3]
+        );
+
+    
     	return \Redirect::to('users/'.Input::get('username').'/about_your_date')->with("verify_key",$email_key);
+        
+        
+        
     
     }
 
@@ -153,8 +197,58 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
-  
+		//dd($id);
+		//$user = User::whereUsername($id)->first();
+		$results = User::all();
+		//$results = array();
+		//dd($results);
+		//return \View::make('search')->withResults($results);
+		//return \View::make('search')->withUser($user);
+		$logged_in = 0;
+             if (Auth::check())
+            {
+                 $logged_in = Auth::user() -> id;
+            }
+        $current_user = User::where('username', $id)->first();
+        $user_id = $current_user -> id;
+        $role_user = DB::table('role_user')->where('user_id', $logged_in)->pluck('role_id');
+        if($role_user != 4){
+            $role_user_status = 0;
+        }
+        else{
+            $role_user_status = 1;
+        }
+        
+            
+
+        $matchThese = ['user_id' => $logged_in, 'friend_id' => $user_id]; 
+        //dd($matchThese);       
+         $friend_user = DB::table('friends')
+            ->where( $matchThese)
+            ->pluck('id');
+        if($friend_user < 1){
+
+                  $friend_status = 0;
+      
+        }
+        else{
+
+            $friend_status = 1;
+        }
+
+        $current_user->role_user_status = $role_user_status;
+        $current_user->friend_status = $friend_status;
+        $current_user->user_id = $logged_in;
+        $current_user->friend_id = $user_id;
+        
+       // dd($current_user);
+        //$current_user = User::findOrNew($id);
+		//dd($current_user);
+
+		//$all_users = User::all();
+
+		return View::make('user_profile')->withUser($current_user);
+
     }
 
     /**

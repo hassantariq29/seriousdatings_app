@@ -29,7 +29,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    //protected $fillable = ['email', 'password'];
+
+    protected $fillable = ['username','password','email','firstName','lastName','verified','profileType','photo','photoType','role','active','online','timeActivated','unsubscribe','relationshipGoal','jobAndJobSchedule','yourSocialSituation','haveChildren','howMany','doYouOwnACar','areYouOnAnyMedication','howAmbitiousAreYou','whatIsTheLongestRelationshipYouHaveBeenIn','yourBirthFatherAndMotherAre','partnerDependability','sexualCompatibility','friendshipBetweenPartners','drugs','hairColor','hairStyle','eyeColor','height','bodyType','zodicSign','smoke','drink','excercise','excerciseSchedule','educationLevel','language','ethnicity','religiousBeliefs','occupation','income','movie','travel','gender','age','zipcode','tatoos','wantKids','relationshipStatus','motherBorn','fatherBorn','remember_token','verify_key','latitude','longitude'];
 
     /**
      * The attributes excluded from the model's JSON form.

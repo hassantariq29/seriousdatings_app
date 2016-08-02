@@ -3,7 +3,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use Input;
+
+use Redirect;
+
 use Illuminate\Support\Facades\View;
+
+
 class AboutYourDateController extends Controller
 {
 
@@ -44,12 +51,16 @@ class AboutYourDateController extends Controller
      */
     public function store()
     {
-        
+
+
     	$rules = array(
-    			'age_from' => 'required',
-    			'age_to'	   => 'required',
+    			'ageFrom' => 'required',
+    			'ageTo'	   => 'required',
     			'rangeOfMiles' => 'required',
-    			'gender' => 'required'
+    			'gender' => 'required',
+                'user_id' => ' unique:about_your_date'
+                
+
     	);
     	$validator = \Validator::make(Input::all(),$rules);
     	if($validator->fails())
@@ -86,11 +97,15 @@ class AboutYourDateController extends Controller
     					'relationshipStatus' => Input::get('relationshipStatus'),
     					'wantKids' => Input::get('wantKids'),
     					'rangeOfMiles' => Input::get('rangeOfMiles'),
-    					'age_from' => Input::get('age_from'),
-    					'age_to' => Input::get('age_to'),
+    					'age_from' => Input::get('ageFrom'),
+    					'age_to' => Input::get('ageTo'),
     					'user_id' =>  Input::get('user_id'),
     					'motherBorn' => Input::get('motherBorn'),
-    					'fatherBorn' => Input::get('fatherBorn')
+    					'fatherBorn' => Input::get('fatherBorn'),
+                        'latitude' => Input::get('lati'),
+                        'longitude' => Input::get('longi')
+                        
+
     			]);
     			return Redirect::to('users/'.Input::get("user_id").'/compatability');
     			

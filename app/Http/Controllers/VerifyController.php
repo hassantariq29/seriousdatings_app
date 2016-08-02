@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Mail;
+use DB;
 class VerifyController extends Controller
 {
  
@@ -12,21 +13,30 @@ class VerifyController extends Controller
     {
     	
     	//dd(\Config::get("mail"));
-    	$verify = \DB::table('users')->where('username',$id)->pluck('verify_key');
-    	$data= array();
+    	$username = $id;
+        $user_id = DB::table('users')->where('username',$id)->pluck('id');
+        $email = DB::table('users')->where('username',$id)->pluck('email');
+        $image = "images/users/".$username."/".DB::table('users')->where('username',$id)->pluck('photo');
+        $name =  DB::table('users')->where('username',$id)->pluck('firstName')." ".DB::table('users')->where('username',$id)->pluck('lastName');
+        $verify = DB::table('users')->where('username',$id)->pluck('verify_key');
+        $verification_link = "http://localhost/seriousdatings_app/public/users/".$user_id."/verify/".$verify;
+        $data= array();
     	$data = [
+            'email' => $email,
+            'image' => $image,
+            'name' => $name,
     		'username' => $id,
-    		'contact_address' => "Contact Address",
-    		'verification_link' => 'http://localhost/seriousdatings/public/users/hasan/verify/'.$verify,
-    		'image_link' => "https://fbcdn-photos-b-a.akamaihd.net/hphotos-ak-xfa1/v/t1.0-0/s200x200/559269_406773439369176_1323302822_n.jpg?oh=edf92db24d1577bcc57c7f1426fd98ef&oe=569B6FEE&__gda__=1453511003_b485a20c04e986aa3105e2c638b2fd96"
+    		'verification_link' => $verification_link,
+            'image_link'        => 'http://seriousdatings.com/images/logo.jpg',
+            'contact_address'   =>  ''
     	];
-		/*
-		Mail::send('mailtemplate', $data, function($message) {
+		
+      	Mail::send('mailtemplate', $data, function($message) {
     		$message->to('softechsgd@gmail.com','ID')->subject('Verify your seriousdatings account');
     	});
-		*/
+		
     	//Session::flush();
-		return "Mail Sent !!";
+		 return View::make('verify_email')->withData($data);
 	
     }
     

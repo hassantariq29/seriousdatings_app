@@ -76,21 +76,9 @@ input[type=password]{
     </div>
   </div>
   <!--/ top -->
-  
-  <div class="header-botom">
-    <div class="container">
-      	 <div class="logo-bg"><a href="{!! url() !!}" title="Seriousdatings">{!! HTML::image('images/logo.jpg') !!}</a></div>
-      
-      <div class="login-formbg">
-        @if(Auth::check())
-		Current User {!! Auth::user()->username !!}.{!! HTML::link('logout','logout') !!}
-		@else
-		@include('login_form')
-		@endif
-      </div>
-    </div>
-  </div>
 </header>
+@include('header_bottom')
+
 <!-- /header -->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -360,52 +348,7 @@ input[type=password]{
     </div>
   </div>
 </div>
-<footer>
-  <div class="container footer-top">
-    <div class="left">
-      <h2>Serious Dating About</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur  amet,Lorem ipsum dolor sit amet, consectetur  amet,</p>
-    </div>
-    <div class="center">
-      <h2>Contact me!</h2>
-      <div class="row">
-        <div class="left">
-          <input type="text"  placeholder="Email Id">
-          <a href="#" class="email"><i class="icon-sprite email-icon"></i></a> </div>
-        <div class="right">
-          <ul>
-            <li><i class="icon-sprite icon-tel"></i>0123 254 589</li>
-            <li><i class="icon-sprite icon-address"></i>Lorem ipsum dolor sit amet, consectetur  amet.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="right">
-      <h2>Socialize with Us</h2>
-      <ul>
-        <li><a href="#"><i class="icon-sprite facebook-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite twiter-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite googleplus-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite flicker-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite rss-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite linkedin-icon"></i></a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="container">
-      <ul>
-        <li><a href="#">home</a></li>
-        <li><a href="#">about</a></li>
-        <li><a href="#">Locations</a></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#">Gallery </a></li>
-        <li><a href="#">contact us</a></li>
-      </ul>
-      <div class="copyright">Copyright &copy; 2015, Serious Dating. All Rights Reserved.</div>
-    </div>
-  </div>
-</footer>
+@include('footer_new')
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script> 
 <script type="text/javascript" src="js/jquery.selectbox-0.2.js"></script> 
 <script type="text/javascript" src="js/jquery.bxslider.js"></script> 

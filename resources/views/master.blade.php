@@ -82,7 +82,7 @@ input[type=password]{
     <div class="container">
       <div class="logo-bg"><a href="{!! url() !!}" title="Seriousdatings">{!! HTML::image('images/logo.jpg') !!}</a></div>
       <div class="login-formbg">
-        @yield('login') {!!-- This will show the rendered view data --!!}
+        @yield('login')
       </div>
     </div>
   </div>
@@ -92,57 +92,42 @@ input[type=password]{
 <div class="middle inner-middle" id="step1">
 	<div class="inner-header aboutyour-header">
     	<div class="container">
-        	 @yield('container') {!!-- This will show the rendered view data --!!}
+        	 @yield('container')
         </div> 
     </div>
      <div class="inner-contendbg">
-     @yield('form_area') {!!-- This will show the rendered view data --!!}
+     @yield('form_area')
 	 </div>
 </div>
 <footer>
-  <div class="container footer-top">
-    <div class="left">
-      <h2>Serious Dating About</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur  amet,Lorem ipsum dolor sit amet, consectetur  amet,</p>
-    </div>
-    <div class="center">
-      <h2>Contact me!</h2>
-      <div class="row">
-        <div class="left">
-          <input type="text"  placeholder="Email Id">
-          <a href="#" class="email"><i class="icon-sprite email-icon"></i></a> </div>
-        <div class="right">
-          <ul>
-            <li><i class="icon-sprite icon-tel"></i>0123 254 589</li>
-            <li><i class="icon-sprite icon-address"></i>Lorem ipsum dolor sit amet, consectetur  amet.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="right">
-      <h2>Socialize with Us</h2>
-      <ul>
-        <li><a href="#"><i class="icon-sprite facebook-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite twiter-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite googleplus-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite flicker-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite rss-icon"></i></a></li>
-        <li><a href="#"><i class="icon-sprite linkedin-icon"></i></a></li>
-      </ul>
-    </div>
-  </div>
+  <div class="container footer-top" >
+
   <div class="footer-bottom">
     <div class="container">
+    <div class="row">
+    
+    <div class="col-md-12">
       <ul>
-        <li><a href="#">home</a></li>
-        <li><a href="#">about</a></li>
-        <li><a href="#">Locations</a></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#">Gallery </a></li>
-        <li><a href="#">contact us</a></li>
+        <li><a href="index.php">home</a></li>
+        <li><a href="about.php">about</a></li>
+        <li><a href="location.php">Locations</a></li>
+        <li><a href="news.php">News</a></li>
+         <li><a href="privacy_policy.php">Policy</a></li>
+          <li><a href="terms_condition.php">Terms</a></li>
+           <li><a href="dating_plan.php">Payments</a></li>
+        <li><a href="gallery.php">Gallery </a></li>
+        <li><a href="contact.php">contact us</a></li>
       </ul>
       <div class="copyright">Copyright &copy; 2015, Serious Dating. All Rights Reserved.</div>
+    
+      </div>
+      
+      </div>
+      
     </div>
+    
+    </div>
+  
   </div>
 </footer>
     </body>
