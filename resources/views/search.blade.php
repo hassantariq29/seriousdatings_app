@@ -69,9 +69,9 @@
                     <div id = "loadingIcon">
                             {!! HTML::Image('images/loader.gif','',array('class' => '')) !!}
                       </div>
-                      
+
                     <div class="row custom1" style="padding-left:5px" id = "search_result_list">
-                      
+                      @if( count($users) > 0 )
                         @foreach($users as $user)
                             <div class="col-md-4 card">
                                 <div class="card_up">
@@ -93,6 +93,9 @@
                                 </div>
                             </div>
                         @endforeach
+                        @else
+                         No Math Found
+                        @endif
                     </div>
                 </div>
 
@@ -136,6 +139,8 @@
     $(document).ready(function()
     {
         $('#loadingIcon').hide();
+        
+        @if( count($users) > 1)
         $('#sort').on('change', function (e) {
               $('#loadingIcon').show();
             var optionSelected = $("option:selected", this);
@@ -194,6 +199,7 @@
 
                     });
         });
+@endif
     });
 </script>
 

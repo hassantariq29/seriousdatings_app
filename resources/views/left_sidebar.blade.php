@@ -4,9 +4,13 @@
          <h5 class="h_basic">Basics:</h5>
          <div class="basic_ul">
          <ul>
+         @if(count($users) > 0 )
          <li> {!! $users[0]['gender']!!}:  {!! $users[0]['ageFrom']!!} -  {!! $users[0]['ageTo']!!} years old</li>
          <li>in {!! $users[0]['location2']!!}</li>
          <li>Photos only</li>
+            @else
+             No Record Found
+         @endif
          </ul>
          </div>
          

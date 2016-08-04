@@ -3,7 +3,8 @@
     <div class="row">
    
     <div class=" col-md-2">
-      <div class="logo-bg"><a href="{!! url() !!}" title="Seriousdatings"><img src="images/logo.jpg" alt="logo"/></a></div>
+      <div class="logo-bg"><a href="{!! url() !!}" title="Seriousdatings">
+        <img src="{!! url()!!}/images/logo.jpg" alt="logo"/></a></div>
       </div>
     
       <div class="col-md-9">
@@ -20,7 +21,7 @@
       </div>
       <div class="col-md-1" style="margin:0px;padding: 0px;">
         <a href="#">
-          <img src="images/A5.jpg" class="img-responsive" alt="image" height="100%" width="100%"/></a>
+          <img src="{!! url()!!}/images/A5.jpg" class="img-responsive" alt="image" height="100%" width="100%"/></a>
       </div>
       
       </div>
