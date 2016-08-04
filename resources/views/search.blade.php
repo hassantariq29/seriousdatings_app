@@ -1,5 +1,5 @@
-@include('header')
-
+@include('header_new')
+@include('header_bottom')
 <div class="middle inner-middle">
 
     <div class="inner-header aboutyour-header">
@@ -66,8 +66,12 @@
                     
 
 
+                    <div id = "loadingIcon">
+                            {!! HTML::Image('images/loader.gif','',array('class' => '')) !!}
+                      </div>
+                      
                     <div class="row custom1" style="padding-left:5px" id = "search_result_list">
-
+                      
                         @foreach($users as $user)
                             <div class="col-md-4 card">
                                 <div class="card_up">
@@ -131,7 +135,9 @@
 <script>
     $(document).ready(function()
     {
+        $('#loadingIcon').hide();
         $('#sort').on('change', function (e) {
+              $('#loadingIcon').show();
             var optionSelected = $("option:selected", this);
             var valueSelected = this.value;
             
@@ -152,6 +158,7 @@
             
             var obj = JSON.parse(dataToSend);
              $('#search_result_list').empty();
+           
                 
             //console.log(obj);
             $.ajax({
@@ -174,6 +181,7 @@
 
                     }
                     //alert(html);
+                    $('#loadingIcon').hide();
                     $('#search_result_list').html(html);
 
 

@@ -66,6 +66,7 @@ class SearchController extends Controller
             }
         }
 
+        //dd($result);
         return View::make('search')->withusers($result);
        // dd($_POST);
 

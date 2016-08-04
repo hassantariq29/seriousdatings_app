@@ -24,7 +24,7 @@ body{ font-family: 'Open Sans', sans-serif;  font-weight:400;}
 .new_navbar ul li:hover ul
 {display: block;}
 .new_navbar ul ul
-{text-decoration: none;background: gray;height: auto;width: 160px; background: #FBFBFB;padding-left: 10%;padding-right: 12%;}
+{text-decoration: none;background: gray;height: auto;width: 160px; background: #FBFBFB;padding-left: 10%;padding-right: 12%;z-index:1000;}
 .new_navbar ul ul li
 {float: left;}
 .new_navbar ul ul li a

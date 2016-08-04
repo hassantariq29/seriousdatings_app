@@ -1,17 +1,38 @@
-{!! Form::open(array('url' => 'login')) !!}
+
+
+      
+      <div class="login-formbg" style="width:760px ;">
+        {!! Form::open(array('url' => 'login')) !!}
+
           <div class="input-cols">
-            <input type="text" name="username" id="username" placeholder="User Name">
+            <input type="text" name="username" placeholder="User Name"/>
             <a href="#" class="input-icon"><i class="user-icon"></i></a> </div>
           <div class="input-cols">
-            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Password"/>
             <a href="#" class="input-icon"><i class="password-icon"></i></a> </div>
-          <input type="submit" value="Login" class="button">
-          <input type="submit" value="sign up" class="button signup" id="signup">
+          <a href="#">
+            <input type="submit" value="Login" class="button">
+          </a>
+           <a class="btn btn-default" href="{!! url() !!}/users/create" role="button" style="margin-left: 1%; line-height: 25px;font-weight: bold; text-decoration: none;color: #FFF;background: #e0262c;">Join Now</a>
+         
           <div class="row">
             <div class="input-cols">
-            	 <input type="checkbox" id="remember" name="check">
+               <input type="checkbox" id="remember" name="check"/>
                  <label for="remember"><span></span>Remember me!</label>
             </div>
-            <div class="input-cols"> <a href="#">Forgot Password ? </a> </div>
+            
+            <div class="input-cols"> 
+             <a href="#" data-reveal-id="myModal" data-animation="fade">Forgot Password ? </a>
+            </div>
+            
+            <div class="input-cols" style="margin-left: 5%;">
+            <a href="https://www.facebook.com/">
+              <img src="images/fb_signup.png" class="img-responsive" alt="group memberadmin image"/>
+            </a>
+            </div>
+            
           </div>
-       {!! Form::close() !!}
+        {!! Form::close() !!}
+      </div>
+      
+     

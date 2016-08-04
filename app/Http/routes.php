@@ -77,20 +77,33 @@ Route::get('/start', function()
 
 Route::get('ajax', 'AjaxRequestController@getSearchType');
 Route::get('users/ajax/profile', 'AjaxRequestController@profileData');
+Route::get('events/category/{category}', 'EventsController@eventCategory');
+Route::get('groups', 'MyGroupController@showGroups');
+Route::get('profile/groups','MyGroupController@index');
+Route::get('groups/{group_id}', 'MyGroupController@show');
+Route::get('profile/groups/create', 'MyGroupController@create');
+Route::get('groups/{groupID}/addMember', 'MyGroupController@addMemberForm');
+Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
 
-
-
+Route::post('groups/ajax/group', 'AjaxRequestController@updateGroupMember');
+/*
+Route::post('groups/ajax/group', function()
+{
+    return 'Success! ajax in laravel 5';
+});
+*/
+Route::post('groups', 'MyGroupController@store');
+Route::post('groups/{groupID}/addMember', 'MyGroupController@addMemberPost');
+Route::post('groups/{groupID}/removeMember', 'MyGroupController@removeMemberPost');
+Route::post('events/create', 'EventsController@create');
 
 Route::resource('users','UsersController');
+Route::resource('events','EventsController');
 Route::resource('users/{username}/about_your_date','AboutYourDateController');
 
 Route::controller('deploy','ServerController');
-
 Route::controller('search', 'SearchController');
-
-
 //::controller('ajax/{action?}/{type?}', 'AjaxRequestController@getSearchType');
-
 Route::controller('users/{username}/compatability','CompatabilityController');
 Route::controller('users/{username}/verify','VerifyController');
 Route::controller('users/{username}/photos','UserPublicPhotoController');

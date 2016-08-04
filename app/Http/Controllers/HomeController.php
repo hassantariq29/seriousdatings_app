@@ -48,8 +48,8 @@ class HomeController extends Controller
 	    		
 	    	
 	    }
-	    $events = \DB::table('me_events')->select(\DB::raw("*,DATE_FORMAT(fromDate,'%d') AS single_date,DATE_FORMAT(fromDate,'%b') AS single_month,DATE_FORMAT(fromDate,'%d-%m-%Y') AS fromDate,DATE_FORMAT(toDate,'%d-%m-%Y') AS toDate"))
-	    ->orderBy('fromDate', 'desc')->take(2)->get();
+	    $events = \DB::table('events')->select(\DB::raw("*,DATE_FORMAT(start,'%d') AS single_date,DATE_FORMAT(endDate,'%b') AS single_month,DATE_FORMAT(start,'%d-%m-%Y') AS fromDate,DATE_FORMAT(endDate,'%d-%m-%Y') AS toDate"))
+	    ->orderBy('start', 'desc')->take(2)->get();
 		return \View::make('homepage')->with(array("just_registered" => $just_registered, "online" => $online, "events" => $events));
     	
     

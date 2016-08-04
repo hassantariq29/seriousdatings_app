@@ -60,7 +60,7 @@
                     </div>
                     <h2>Phone Chat</h2>
                 </a> </div>
-            <div class="connect-with-left float-right"> <a href="video_chat.php">
+            <div class="connect-with-left float-right"> <a href="#">
                     <div class="serious-icons">
 
                         {!! HTML::Image("images/video-chat-icon.png" ,"") !!}
@@ -68,15 +68,15 @@
                         </div>
                     <h2>Video Chat</h2>
                 </a> </div>
-            <div class="connect-with-left"> <a href="dating_plan.php">
+            <div class="connect-with-left"> <a href="#">
                     <div class="serious-icons">{!! HTML::Image("images/serious-dating-icon.png" ,"") !!}</div>
                     <h2>Serious Dating</h2>
                 </a> </div>
-            <div class="connect-with-left float-right"> <a href="virtual_gift.php">
+            <div class="connect-with-left float-right"> <a href="#">
                     <div class="serious-icons">{!! HTML::Image("images/vi-iconrtual-gift.png" ,"") !!}</div>
                     <h2>Virtual Gift</h2>
                 </a> </div>
-            <div class="connect-with-left"> <a href="travel.php">
+            <div class="connect-with-left"> <a href="#">
                     <div class="serious-icons">{!! HTML::Image("images/serious-vecation-icon.png" ,"") !!}</div>
                     <h2>Serious Vacation</h2>
                 </a> </div>
@@ -86,12 +86,12 @@
                 </a> </div>
 
             <div class="row" style="margin-left: -5px;">
-                <div class="connect-with-left float-right" style="margin-left: 8px;"> <a href="new_calendar.php">
+                <div class="connect-with-left float-right" style="margin-left: 8px;"> <a href="{!! url() !!}/events">
                         <div class="serious-icons">{!! HTML::Image("images/background-check-icondating.png" ,"") !!}</div>
                         <h2>Upcoming <br /> Events</h2>
                     </a> </div>
 
-                <div class="connect-with-left float-right" style="margin-right:-5;"> <a href="invite_friend.php">
+                <div class="connect-with-left float-right" style="margin-right:-5;"> <a href="#">
                         <div class="serious-icons">{!! HTML::Image("images/background-check-iconthreefriends.png" ,"") !!}</div>
                         <h2><i>+</i>Invite Your Friends</h2>
                     </a> </div>
@@ -99,12 +99,12 @@
 
             <div class="row" style="margin-left: -5px;">
 
-                <div class="connect-with-left float-right" style="margin-left: 6px;"> <a href="love_compatible.php">
+                <div class="connect-with-left float-right" style="margin-left: 6px;"> <a href="{!! url() !!}/users/{!! Auth::user()->username !!}/compatability">
                         <div class="serious-icons">{!! HTML::Image("images/love_compatible-icon.png" ,"") !!}</div>
                         <h2>Love Compatibility</h2>
                     </a> </div>
 
-                <div class="connect-with-left float-right" style="margin-left: 8px;"> <a href="new_calendar.php">
+                <div class="connect-with-left float-right" style="margin-left: 8px;"> <a href="{!! url() !!}/groups">
                         <div class="serious-icons">{!! HTML::Image("images/group-icon.png" ,"") !!}</div>
                         <h2>Groups</h2>
                     </a> </div>
@@ -118,7 +118,7 @@
                 <li> <a href="{!! url() !!}/profile/photo">My Photo</a> </li>
                 <li> <a href="{!! url() !!}/profile/music">My Music</a> </li>
                 <li> <a href="{!! url() !!}/profile/video">My Video </a> </li>
-                <li><a href="{!! url() !!}/profile/group">Create Groups</a></li>
+                <li><a href="{!! url() !!}/profile/groups/create">Create Groups</a></li>
             </ul>
         </div>
     </div>

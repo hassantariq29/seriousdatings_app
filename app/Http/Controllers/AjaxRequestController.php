@@ -96,6 +96,23 @@ class AjaxRequestController extends Controller
       }
     }
 
+    public function updateGroupMember(){
 
+      $dataReceived = Input::get("data");
+      $data_arr = $dataReceived['data'][0];
+      $action = $data_arr['action'];
+      $groupID = $data_arr['groupID'];
+      $userID = $data_arr['userID'];
+      if($action == "join"){
+        DB::table('group_member')->insert(
+          ['group_id' => $groupID, 'user_id' => $userID]
+        );
+      }
+      else{
+        $matchThese = ['group_id' => $groupID, 'user_id' => $userID]; 
+        DB::table('group_member')->where($matchThese)->delete();
+      }
+      return "1";
+    }
 
 }

@@ -10,6 +10,18 @@
         top: 0;
         width: 100%;
     }
+
+    /*-------- custom checkbox ----------*/
+input[type="checkbox"] {display:none;}
+input[type="checkbox"] + label {font-size:13px; line-height:23px; margin:5px 0; display:block; min-height:inherit; margin:0;}
+input[type="checkbox"] + label span { display:inline-block; width:22px; height:22px; margin:-1px 4px 0 0; vertical-align:middle; cursor:pointer;
+ background:#0C6;}
+input[type="checkbox"] + label span{background:#fff url(../images/check-box.png) no-repeat; height:11px; width:11px;}
+input[type="checkbox"]:checked + label span{ background-position:0 -12px;}
+input[type="checkbox"] + label span, input[type="checkbox"]:checked + label span {-webkit-transition:background-color 0.4s linear;
+  -o-transition:background-color 0.4s linear;  -moz-transition:background-color 0.4s linear;  transition:background-color 0.4s linear;}
+  
+
 </style>
     
 @if (Session::has('message'))

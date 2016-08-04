@@ -22,14 +22,14 @@ class Event extends Model implements AuthenticatableContract, CanResetPasswordCo
      *
      * @var string
      */
-    protected $table = 'me_events';
+    protected $table = 'events';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['title', 'fromDate', 'toDate','addDate','description','location','ageFrom','ageTo','image','charge'];
+    protected $fillable = ['eventType', 'title', 'start','end','evemtLocation','desc','eventPrice'];
 
     /**
      * The attributes excluded from the model's JSON form.
