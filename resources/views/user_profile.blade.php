@@ -15,7 +15,7 @@
           @if(Auth::check())
                 @if ($user -> role_user_status === 0)
 
-                    <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="subscribe">Subscribe</a> 
+                    <a class="btn btn-default" href="{!! url() !!}/datingPlan" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="subscribe">Subscribe</a> 
                 @elseif ($user -> friend_status == 1)
                     <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="removeFriendRequest">Remove Friend</a> 
                     <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="message">Message</a> 
