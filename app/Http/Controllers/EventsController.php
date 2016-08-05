@@ -24,7 +24,7 @@ class EventsController extends Controller
         
 
         $events = DB::table('events')
-        ->leftJoin('eventType', 'events.eventType', '=', 'eventType.id')
+        ->leftJoin('eventtype', 'events.eventType', '=', 'eventType.id')
         ->get();
 
          $eventCategory = DB::table('eventtype')->get();
@@ -91,7 +91,7 @@ class EventsController extends Controller
                  $logged_in = Auth::user() -> id;
             }
         $singleEvent = DB::table('events')
-                     ->leftJoin('eventType', function($join)
+                     ->leftJoin('eventtype', function($join)
                          {
                              $join->on('events.eventType', '=', 'eventtype.id');
                              
@@ -178,7 +178,7 @@ class EventsController extends Controller
     {
         
         $events = DB::table('events')
-        ->leftJoin('eventType', 'events.eventType', '=', 'eventType.id')
+        ->leftJoin('eventtype', 'events.eventType', '=', 'eventType.id')
         ->where('events.eventType', '=', $id)
         ->get();
         if($events != null){
@@ -202,4 +202,5 @@ class EventsController extends Controller
         return \View::make('eventsGroup')->withEvents($data);
     }
 
+    
 }

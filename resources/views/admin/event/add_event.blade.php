@@ -29,6 +29,17 @@
             <strong>You have some form errors!</strong> Please check below. </div>
         </div>
         <div class="form-group">
+          <label class="col-sm-2 control-label">Event Category <span class="symbol required"></span></label>
+          <div class="col-sm-9">
+            <select name="eventCategory" class="form-control">
+              <option value="0"> Select Event Category</option>
+              @foreach($event as $e)
+                <option value="{!! $e -> id !!}">{!! $e -> name !!}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
           <label class="col-sm-2 control-label">Title <span class="symbol required"></span></label>
           <div class="col-sm-9">
             <input type="text" class="form-control" name="title" placeholder="Enter your title" required>
@@ -62,19 +73,6 @@
                 <div class="img">File size should be 686 x 547</div>
              </div>
           
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Age <span class="symbol required"></span></label>
-          <div class="col-sm-9">
-          <div class="row">
-          <div class="col-sm-6">
-           <input type="text" class="form-control" placeholder="From" name="fromAge" id="fromAge" required>
-            </div>
-            <div class="col-sm-6">
-            <input type="text" class="form-control" placeholder="To" name="toAge" id="toAge" required>
-             </div>
-             </div>
           </div>
         </div>
         <div class="form-group">

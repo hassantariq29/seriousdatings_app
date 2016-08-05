@@ -13,32 +13,21 @@
 
 <div class="middle">
   <div class="top-banner">
-  	<div class="top-cloud"><img src="images/top-cloud.png" alt="cloud"></div>
+    <div class="top-cloud"><img src="images/top-cloud.png" alt="cloud"></div>
     <ul class="bxslider">
-    
-    <li><img src="images/banner1.png" alt="slider-1"/>
-        <div class="top-slider-description">
-          <div class="slider-top-heading"><img src="images/joinus.png" alt="joinus"></div>
-          <div class="attractive">Attractive & Successful Single</div>
-          <div class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id congue ipsum. Quisque vehicula massa quis urna malesuada viverra.</div>
-          <a href="#" class="slider-btn">Meeting Some New People</a> </div>
-      </li>
-      
-      
-      <li><img src="images/banner2.png" alt="slider-1"/>
-        <div class="top-slider-description">
-          <div class="slider-top-heading"><img src="images/joinus.png" alt="joinus"></div>
-          <div class="attractive">Attractive & Successful Single</div>
-          <div class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id congue ipsum. Quisque vehicula massa quis urna malesuada viverra. </div>
-          <a href="#" class="slider-btn">Meeting Some New People</a> </div>
-      </li>
-      <li><img src="images/banner3.png" alt="slider-1"/>
-        <div class="top-slider-description">
-          <div class="slider-top-heading"><img src="images/joinus.png" alt="joinus"></div>
-          <div class="attractive">Successful Single</div>
-          <div class="banner-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id congue ipsum. Quisque vehicula massa quis urna malesuada viverra. </div>
-          <a href="#" class="slider-btn">Meeting Some New People</a> </div>
-      </li>
+    @if($slides != null)
+      @foreach($slides as $slide)
+          <li><img src="{!! url() !!}/images/slider/{!! $slide -> image!!}" alt="slider-1"/>
+              <div class="top-slider-description">
+                <div class="slider-top-heading">
+                  <img src="images/joinus.png" alt="joinus">
+                </div>
+                <div class="attractive">{!! $slide -> title !!}</div>
+                <div class="banner-description">{!! $slide -> description !!}</div>
+                <a href="#" class="slider-btn">Meeting Some New People</a> </div>
+            </li>
+        @endforeach
+      @endif
     </ul>
   </div>
   <div class="container search-welcomebg">
@@ -48,19 +37,19 @@
         <div class="topheading"><i class="icon-sprite"></i>Search People</div>
       </div>
       <div class="searchpeople-form">
-	  <form method="post" action ="search_result.php" >
+          {!!  Form::open(array('action' => 'SearchController@postIndex','method' => 'POST','target' => '_blank')) !!}
         <div class="two-cols">
           <label>I am :</label>
-          <select name="gender" id="gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
+          <select name="myGender" id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
           </select>
         </div>
         <div class="two-cols">
           <label>Looking For :</label>
-          <select name="looking_for" id="lookingfor">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
+          <select name="gender" id="lookingfor">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
           </select>
         </div>
         <div class="two-cols">
@@ -89,7 +78,7 @@
         </div>
         <div class="two-cols">
           <label>Miles :</label>
-          <select name="miles" id="weight" >
+          <select name="range" id="weight" >
             <option value="20">20</option>
             <option value="25">25</option>
             <option value="30">30</option>
@@ -98,7 +87,7 @@
         </div>
         <div class="row">
           <input type="submit" value="Search" class="button">
-		  </form>
+        {!! Form::close() !!}
         </div>
       </div>
     </div>
@@ -121,64 +110,64 @@
   <div class="container">
     <div class="full-width-add"><img src="images/full-add.jpg" alt="add"></div>
   </div>
-  <div class="just-registered-bg">
+    <div class="just-registered-bg">
     <div class="container">
+    
+    <div class="row custom_indexcol">
+    
+    <div class="col-md-6" style="padding: 0px;">
     <div class="just-registered">
       <h2 class="registered-h">They just registered</h2>
-      <div class="row">
+      <div class="row" style="margin-left: 0px !important;">
         <ul class="images-shape bxslider3">
-
-
-        	@foreach($just_registered as $registered)
-				@if($registered->count == 1) 
-				<li>
-				@endif
-				<a href="users/{!! $registered->username !!}">
-				<div class="hexagon"></div>
-				{!! HTML::image('images/users/'.$registered->username.'/'.$registered->photo) !!}
-				<span class="image-title">{!! $registered->username !!}</span>
-				</a>
-				@if($registered->count == 2){ 
-				</li>
-				@endif
-		@endforeach        
+          <li>
+           @if($just_registered != null)
+                  @foreach($just_registered as $registered)
+                      <a href="{!! url() !!}/users/{!! $registered->username !!}">
+                        <div class="hexagon"></div>
+                        {!! HTML::image('images/users/'.$registered->username.'/'.$registered->photo,'shape1',array('class' =>'img-responsive')) !!}
+                        <span class="image-title">{!! $registered->username !!}</span>
+                     </a>
+                  @endforeach
+             @endif  
+          </li>
         </ul>
       </div>
       </div>
+      </div>
       
+      <div class="col-md-6">
       <div class="invite-frd-right">
         <div class="now-onlinebg"> 
-        	<div class="online-heading">Now Online <div class="onlineindigater"><span class="green-signal"></span></div></div>
+          <div class="online-heading">Now Online <div class="onlineindigater"><span class="green-signal"></span></div></div>
             <div class="online-user-bg">
-            	<div class="container">
+              <div class="container">
                       <ul class="bxslider2">
-                        
-				@foreach($online as $on)
-						@if($on->count == 1)
-						<li>
-						@endif
-						<a href="users/{!! $registered->username !!}">
-						<div class="images-bg">
-							{!! HTML::image('images/users/'.$on->username.'/'.$on->photo) !!}
-						</div>
-						<span class="user-name">{!! $on->username !!}</span>
-						@if($on->online == 1) 
-						<div class="user-status-detailbg"><span class="user-status-detail online"></span></div>
-						@else
-						<div class="user-status-detailbg"><span class="user-status-detail offline"></span></div>
-						</a>
-						@endif
-						
-						@if($on->count == 6)
-						</li>
-						@endif
-@endforeach   
-		
-		
-						</ul>
-   				 </div>
+                        <li>
+                          @if($online != null)
+                              @foreach($online as $on)
+                                <a href="{!! url() !!}/users/{!! $on -> username !!}">
+                                    <div class="images-bg">
+                                        {!! HTML::image('images/users/'.$on->username.'/'.$on->photo,'user-one',array('class' => '')) !!}
+                                    </div>
+                                      <span class="user-name">{!! $on -> username !!}</span>
+                                      <span class="user-detail"></span>
+                                        @if($on -> online == 1) 
+                                            <div class="user-status-detailbg"><span class="user-status-detail online"></span></div>
+                                        @else
+                                            <div class="user-status-detailbg"><span class="user-status-detail offline"></span></div>
+                                        @endif
+                                  </a>
+                                @endforeach
+                            @endif
+                        </li>
+                      </ul>
+           </div>
             </div>
         </div>
+        </div>
+        </div>
+        
         </div>
         
         
@@ -186,14 +175,14 @@
   </div>
   <div class="invite-container">
       <div class="container">
-      		  <div class="invite-frd-row">
+            <div class="invite-frd-row">
               <div class="three-frd"><img src="images/three-frd.png" alt="frd"></div>
               <div class="connect-arrow"><img src="images/connect-arrow.png" alt="connect"></div>
-        	  <a href="#" class="invite-frnbtn"><i>+</i> Invite Your Friends</a>
+            <a href="#" class="invite-frnbtn"><i>+</i> Invite Your Friends</a>
              <div class="connect-arrow"><img src="images/connect-arrow.png" alt="connect"></div>
             <div class="invide-social">
-            	<ul>
-                	<li><a href="#"><i class="icon-sprite icon-rss-r"></i></a></li>
+              <ul>
+                  <li><a href="#"><i class="icon-sprite icon-rss-r"></i></a></li>
                     <li><a href="#"><i class="icon-sprite icon-fb-r"></i></a></li>
                     <li><a href="#"><i class="icon-sprite icon-twitter-r"></i></a></li>
                     <li><a href="#"><i class="icon-sprite icon-linked-r"></i></a></li>
@@ -203,77 +192,96 @@
     </div>
   </div>
   <div class="container video-event-bg">
-    <div class="video-continer">
-      <div class="left-video"> <img src="images/video-one1.jpg" alt="video"> </div>
+      <div class="row video-continer">
+       
+       <div class="col-md-6">
+      <div class="left-video"> 
+            @if($video != null)
+                 <video width="580" height = "340" controls>
+                      <source src="{!! url() !!}/videos/{!! $video -> video !!}" type="video/mp4">
+                          Your browser does not support HTML5 video.
+                  </video>
+              @endif
+         </div>
+      </div>
+      
+      <div class="col-md-6">
       <div class="video-chatbg">
         <h2>Speed Dating</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id congue ipsum. Quisque vehicula massa quis urna malesuada viverra. Proin sit amet odio urna, eu volutpat ante. Fusce eget nisi pulvinar neque venenatis aliquam. </p>
-        <a href="video-chat.php" class="button red-btn">Video Chat</a> </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Maecenas id congue ipsum. Quisque vehicula massa quis urna malesuada viverra.
+         Proin sit amet odio urna, eu volutpat ante. Fusce eget nisi pulvinar neque venenatis aliquam. </p>
+        <a href="video_chat.php" class="button red-btn">Video Chat</a> </div>
+        </div>
+        
     </div>
     <!-- /video-continer -->
     
     <div class="event-fbbg">
-      <div class="speed-datingbg"><img src="images/speed-dating.jpg" alt="speeddating"></div>
+      <div class="speed-datingbg"><img src="images/speed-dating.jpg" alt="speeddating"/></div>
       <div class="upcoming-event">
-        <h3>Upcoming Event</h3>
+       <a href="new_calendar.php"> <h3 style="color: black;">Upcoming Event</h3> </a>
         <div class="event-bg">
-		  <ul>
-			@foreach($events as $event)
-			<li>
-              <div class="date-year"> <span>{!! $event->single_date !!}</span> <span>{!! $event->single_month !!}</span> </div>
-              <div class="commenter-detail-year"> <span><a href="#">{!! $event->title !!}</a></span> <span>{!! $event->title !!}</span> <span>{!! $event->desc !!}</span> </div>
-            </li>
-			@endforeach
+          <ul>
+            @if($events != null)
+                   @foreach($events as $event)
+                      <li>
+                        <div class="date-year"> <span>{!! $event->single_date !!}</span> <span>{!! $event->single_month !!}</span> </div>
+                        <div class="commenter-detail-year">
+                          <span>
+                            <a href="{!! url() !!}/events/{!! $event -> title !!}">
+                              {!! $event -> title !!}
+                            </a>
+                          </span> 
+                          <span>{!! $event->title !!}</span> 
+                          <span>{!! $event->desc !!}</span> 
+                        </div>
+                      </li>
+                    @endforeach
+              @endif
           </ul>
         </div>
       </div>
       <!-- upcoming-event-->
       
       <div class="facebook-find">
-		<div class="fb-page" data-href="https://www.facebook.com/SeriousDating" data-width="293" data-height="293" data-small-header="false" data-adapt-container-width="false" data-hide-cover="true" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/SeriousDating"><a href="https://www.facebook.com/SeriousDating">seriousdatings.com</a></blockquote></div></div>
-	  </div>
+          <div class="fb-page" data-href="https://www.facebook.com/SeriousDating" data-width="293" data-height="293" data-small-header="false" data-adapt-container-width="false" data-hide-cover="true" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/SeriousDating"><a href="https://www.facebook.com/SeriousDating">seriousdatings.com</a></blockquote></div></div>
+      </div>
       <div class="dating-type">
         <ul>
           <li><a href="#">Ecards <span>Lorem ipsum dolor </span></a> <span class="icon-sprite ecard-icon"></span></li>
           <li><a href="#">Background <span>Lorem ipsum dolor </span></a> <span class="icon-sprite background-icon"></span></li>
-          <li><a href="#">Phone Chat <span>Lorem ipsum dolor </span></a> <span class="icon-sprite phone-icon"></span></li>
+          <li><a href="phone_chat.php">Phone Chat <span>Lorem ipsum dolor </span></a> <span class="icon-sprite phone-icon"></span></li>
         </ul>
-        <div class="calual-dating"><img src="images/casual-dating.jpg" alt="casul-dating"></div>
+        <div class="calual-dating"><img src="images/casual-dating.jpg" alt="casul-dating"/></div>
       </div>
     </div>
   </div>
   <div class="bottom-imagesslider-bg">
     <div class="container">
       <ul class="bxslider1">
-        <li><a href="#"><img src="images/b-slide1.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide2.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide3.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide4.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide1.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide2.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide3.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide4.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide1.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide2.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide3.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide4.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide1.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide2.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide3.png" alt="slider-profile"/></a></li>
-        <li><a href="#"><img src="images/b-slide4.png" alt="slider-profile"/></a></li>
+        @if($giftCards != null)
+          @foreach($giftCards as $giftCard)
+            <li>
+              <a href="#">
+                  <img src="{!! url() !!}/images/gift_cards/{!! $giftCard -> image !!}" alt="slider-profile"/>
+              </a>
+            </li>
+          @endforeach
+        @endif
       </ul>
     </div>
   </div>
 </div>
 @include('footer_new')
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script> 
-<script type="text/javascript" src="js/jquery.selectbox-0.2.js"></script> 
-<script type="text/javascript" src="js/jquery.bxslider.js"></script> 
+<script type="text/javascript" src="{!! url() !!}/js/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="{!! url() !!}/js/jquery.selectbox-0.2.js"></script> 
+<script type="text/javascript" src="{!! url() !!}/js/jquery.bxslider.js"></script> 
 <script type="text/javascript">
-	$(function () {
-	$("#language, #gender, #lookingfor, #age, #ageto,#zipcode, #weight ").selectbox();
-	});
-	</script> 
+  $(function () {
+  $("#language, #gender, #lookingfor, #age, #ageto,#zipcode, #weight ").selectbox();
+  });
+  </script> 
 <script type="text/javascript">
 $('.bxslider').bxSlider({
   mode: 'fade',

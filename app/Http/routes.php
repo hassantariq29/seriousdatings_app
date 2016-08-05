@@ -137,6 +137,8 @@ Route::group(array('before' => 'admin'), function() {
 	});
 	Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
 	Route::get('admin/change_password', 'ChangePasswordController@showForm');
+	Route::get('admin/events/addEventType', 'EventManagementController@eventTypeForm');
+	Route::post('admin/events/type', 'EventManagementController@eventTypePost');
 	Route::post('admin/change_password', 'ChangePasswordController@updatePassword');
 	Route::resource('admin/slide','SlideManagementController');
 	Route::resource('admin/events','EventManagementController');

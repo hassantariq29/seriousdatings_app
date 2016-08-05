@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Event;
-
+use View;
+use DB;
+use Redirect;
+use Input;
 class EventManagementController extends Controller
 {
     /**
@@ -17,10 +20,9 @@ class EventManagementController extends Controller
      */
     public function index()
     {
-         $events = Event::all();
-         if ($events === null) {
-            $events = null;
-        }
+         $events = DB::table('events')
+        ->leftJoin('eventtype', 'events.eventType', '=', 'eventType.id')
+        ->get();
          return \View::make('admin.event.manage_event')->withEvents($events);
     }
 
@@ -31,7 +33,14 @@ class EventManagementController extends Controller
      */
     public function create()
     {
-        return \View::make('admin.event.add_event');
+        $event = DB::table('eventtype')->get();
+        if($event != null){
+            return \View::make('admin.event.add_event')->withEvent($event);
+        }
+        else
+        {
+            return redirect(url().'/admin/events/addEventType');
+        }
     }
 
     /**
@@ -42,39 +51,37 @@ class EventManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //return 'form posted';
         $rules = array(
+                'eventCategory' => 'required',
                 'title' => 'required',
                 'location'    => 'required',
                 'fromDate' => 'required',
-				'toDate' => 'required',
-				'fromAge' => 'required',
-				'toAge' => 'required',
-				'description' => 'required',
-				'price' => 'required',
-				'uploadpicture' => 'required'
+                'toDate' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'uploadpicture' => 'required'
                 );
-				$validator = \Validator::make(\Input::all(),$rules);
+                $validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
-					//return ($validator->messages());
+                    //return ($validator->messages());
                     return \Redirect::to('admin/events/create')
                     ->withInput()
                     ->witherrors($validator->messages());
                 $filname = \Input::file('uploadpicture')->getClientOriginalName();
                 $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
-                \Input::file('uploadpicture')->move(base_path() . '/public/images/events/', $filname);
-                 $event= Event::create(array(
-                    'title'          => \Input::get('title'),
-					'location'          => \Input::get('location'),
-					'fromDate'          => \Input::get('fromDate'),
-					'toDate'          => \Input::get('toDate'),
-					'ageFrom'          => \Input::get('fromAge'),
-					'ageTo'          => \Input::get('toAge'),
-					'description'    => \Input::get('description'),
-					'charge'   		 => \Input::get('price'),
-					'image'          => $filname
-                ));
-                return \Redirect::to('admin/events');
+                Input::file('uploadpicture')->move(base_path() . '/public/images/events/', $filname);
+                $eventCategory = Input::get('eventCategory');
+                $title = Input::get('title');
+                $location = Input::get('location');
+                $fromDate = Input::get('fromDate');
+                $toDate = Input::get('toDate');
+                $description = Input::get('description');
+                $price = Input::get('price');
+                
+                DB::table('events')->insert(
+                    ['eventType' => $eventCategory, 'title' => $title, 'start' => $fromDate, 'endDate' => $toDate, 'eventLocation' => $location,'desc' => $description,'eventPrice' => $price,'image' => $filname]
+                );
+                 return redirect(url().'/admin/events');
     
     }
 
@@ -112,38 +119,37 @@ class EventManagementController extends Controller
     {
     //return 'form posted';
         $rules = array(
+                'eventCategory' => 'required',
                 'title' => 'required',
                 'location'    => 'required',
                 'fromDate' => 'required',
-				'toDate' => 'required',
-				'fromAge' => 'required',
-				'toAge' => 'required',
-				'description' => 'required',
-				'price' => 'required',
-				'uploadpicture' => 'required'
+                'toDate' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'uploadpicture' => 'required'
                 );
-				$validator = \Validator::make(\Input::all(),$rules);
+                $validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
-					//return ($validator->messages());
+                    //return ($validator->messages());
                     return \Redirect::to('admin/events/create')
                     ->withInput()
                     ->witherrors($validator->messages());
                 $filname = \Input::file('uploadpicture')->getClientOriginalName();
                 $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
-                \Input::file('uploadpicture')->move(base_path() . '/public/images/events/', $filname);
-                $event = Event::find($id);
-                $event->title = \Input::get('title');
-                $event->location = \Input::get('location');
-				$event->fromDate = \Input::get('fromDate');
-				$event->toDate = \Input::get('toDate');
-				$event->ageFrom = \Input::get('fromAge');
-				$event->ageTo = \Input::get('toAge');
-				$event->description = \Input::get('description');
-				$event->charge = \Input::get('price');
-				$event->image = $filname;
-                $event->save();
-                \Session::flash('message', 'Successfully updated slide!');
-                return \Redirect::to('admin/events');
+
+                $eventCategory = Input::get('eventCategory');
+                $title = Input::get('title');
+                $location = Input::get('location');
+                $fromDate = Input::get('fromDate');
+                $toDate = Input::get('toDate');
+                $description = Input::get('description');
+                $price = Input::get('price');
+                
+                DB::table('events')->insert(
+                    ['eventType' => $eventCategory, 'title' => $title, 'start' => $fromDate, 'endDate' => $toDate, 'evenLocation' => $location,'desc' => $description,'eventPrice' => $price,'image' => $filname]
+                );
+                 return redirect(url().'/admin/events');
+               
     }
 
     /**
@@ -159,5 +165,31 @@ class EventManagementController extends Controller
         // redirect
         \Session::flash('message', 'Successfully deleted the slide!');
         return \Redirect::to('admin/events');
+    }
+
+
+    public function eventTypeForm(){
+
+
+        return View::make('admin.event.add_event_type');
+
+    }
+
+
+    public function eventTypePost(Request $request){
+
+        $categoryName = Input::get('categoryName');
+        $ageFromMale = Input::get('ageFromMale');
+        $ageToMale = Input::get('ageToMale');
+        $ageFromFemale = Input::get('ageFromFemale');
+        $ageToFemale = Input::get('ageToFemale');
+        DB::table('eventtype')->insert(
+            ['name' => $categoryName, 'ageFromMale' => $ageFromMale, 'ageToMale' => $ageToMale, 'ageFromFemale' => $ageFromFemale, 'ageToFemale' => $ageToFemale]
+        );
+         return redirect(url().'/admin/events');
+
+
+        
+
     }
 }

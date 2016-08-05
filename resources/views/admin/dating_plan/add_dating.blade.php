@@ -29,30 +29,61 @@
             <strong>You have some form errors!</strong> Please check below. </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Plan Name <span class="symbol required"></span></label>
+          <label class="col-sm-2 control-label">Plan Type <span class="symbol required"></span></label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"   placeholder="Enter your plan name" name="name" required >
+            <select name="planType" class="form-control">
+              <option value="0"> Select Event Category</option>
+              <option value="Daily"> Daily</option>
+              <option value="Monthly"> Monthly</option>
+              <option value="Yearly"> Yearly</option>
+            </select>  
+          </div>
+          </div>
+
+          <div class="form-group">
+          <label class="col-sm-2 control-label">No Of Days / Months / Years <span class="symbol required"></span></label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="" placeholder=" No Of Days / Months / Years" name="noOfDay" required>
           </div>
         </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Plan Name <span class="symbol required"></span></label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"   placeholder="Enter your plan name" name="planName" required >
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="col-sm-2 control-label">Plan Price <span class="symbol required"></span></label>
           <div class="col-sm-9">
             <input type="text" class="form-control" id="" placeholder="Enter plan Price" name="price" required>
           </div>
         </div>
-        
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label"> Discount ( % ) <span class="symbol required"></span></label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="" placeholder="Enter percentage" name="discountPercentage" required>
+          </div>
+        </div>
+
+
         <div class="form-group">
           <label class="col-sm-2 control-label">Description</label>
           <div class="col-sm-9">
             <textarea  class="form-control summernote" name="description"></textarea>
           </div>
         </div>
+
+
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <input type="submit" value="Submit" class="btn btn-success">
             <input type="button" value="Cancel" class="btn btn-danger">
           </div>
         </div>
+
       </div>
 	{!! Form::close() !!}
 @stop

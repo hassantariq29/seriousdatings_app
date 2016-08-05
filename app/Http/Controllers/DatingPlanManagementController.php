@@ -43,9 +43,12 @@ class DatingPlanManagementController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-                'name' 				=> 'required',
-				'price' 			=> 'required',
-                'description'    	=> 'required'
+                'planType'             => 'required',
+                'noOfDay'              => 'required',
+                'discountPercentage'   => 'required',
+                'planName' 				   => 'required',
+                'price' 			   => 'required',
+                'description'    	   => 'required'
                 );
         $validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
@@ -53,7 +56,10 @@ class DatingPlanManagementController extends Controller
                     ->withInput()
                     ->witherrors($validator->messages());
                  $datingPlan= DatingPlan::create(array(
-                    'name'          => \Input::get('name'),
+                    'type'          => \Input::get('planType'),
+                    'noOfDay'          => \Input::get('noOfDay'),
+                    'discountPercentage'          => \Input::get('discountPercentage'),
+                    'name'          => \Input::get('planName'),
                     'price'         => \Input::get('price'),
                     'description'   => \Input::get('description')
                 ));

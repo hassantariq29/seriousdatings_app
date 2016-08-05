@@ -37,7 +37,7 @@
                     <th width="20%">Description</th>
                     <th width="20%">Location</th>
 					<th width="20%">Event Date</th>
-					<th width="5%">Age Group</th>
+					<th width="5%">Event Category</th>
 					<th width="10%">Price</th>
 					<th width="5%" class"text-center">Action</th>
                   </tr>
@@ -50,15 +50,16 @@
                           <input type="checkbox">
                         </label>
                       </div></td>
-
-                    <td><div class="table-img">{!! HTML::image('images/events/'.$event->image, 'alt', array( 'class' => 'img-thumbnail img-responsive')) !!}</div></td>
-                    <td>{!! $event->title !!} </td>
-                    
-					<td>{!! $event->description !!}</td>
-                    <td><div class="table-description"><p>{!! $event->location !!}</p></div></td>
-					<td><div class="table-description"><p>{!! date('d F, Y', strtotime($event->fromDate)) !!} <br/> To <br/> {!! date('d F, Y', strtotime($event->toDate)) !!}</p></div></td>
-					<td><div class="table-description"><p>{!! $event->ageFrom !!} To {!! $event->ageTo !!}</p></div></td>
-					<td><div class="table-description"><p>$ {!! $event->charge !!}</p></div></td>
+                      <td>
+                        <div class="table-img">{!! HTML::image('images/events/'.$event->image, 'alt', array( 'class' => 'img-thumbnail img-responsive')) !!}
+                        </div>
+                    </td>
+                    <td>{!! $event -> name !!} </td>
+                    <td>{!! $event -> desc !!}</td>
+                    <td><div class="table-description"><p>{!! $event -> eventLocation !!}</p></div></td>
+					          <td><div class="table-description"><p>{!! date('d F, Y', strtotime($event->start)) !!} <br/> To <br/> {!! date('d F, Y', strtotime($event->endDate)) !!}</p></div></td>
+					         <td><div class="table-description"><p>{!! $event -> title !!} </p></div></td>
+					         <td><div class="table-description"><p>$ {!! $event -> eventPrice !!}</p></div></td>
 					
                     <td><div class="btn-group table-action"> <a class="btn btn-flickr btn-sm dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i> Action <span class="caret"></span> </a>
                         <ul role="menu" class="dropdown-menu">

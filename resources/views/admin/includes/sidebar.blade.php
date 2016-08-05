@@ -16,7 +16,10 @@
       <li><a href="#"><i class="fa fa-file-image-o fa-fw"></i> Event Management <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
          <li><a href="{{ url('/') }}/admin/events">Manage event</a></li>
+         <li><a href="{{ url('/') }}/admin/events/addEventType">Add  event type</a></li>
+          
           <li><a href="{{ url('/') }}/admin/events/create">Add new event</a></li>
+
          
         </ul>
     

@@ -2,9 +2,12 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
-use App\Http\Controllers\Auth;
-
+use Auth;
+use DB;
+use Redirect;
+use Input;
+use View;
+use Carbon\carbon;
 class HomeController extends Controller
 {
  
@@ -12,7 +15,7 @@ class HomeController extends Controller
     public function getIndex()
     {
 		$just_registered = \DB::table('users')->get();
-    	$online = \DB::table('users') ->leftJoin('user_online', 'users.id', '=', 'user_online.user_id')->get();
+    	$online = \DB::table('user_online') ->leftJoin('users', 'users.id', '=', 'user_online.user_id')->get();
     	 
     	$count = 0;
     	foreach ($just_registered as $registered){
@@ -48,30 +51,53 @@ class HomeController extends Controller
 	    		
 	    	
 	    }
-	    $events = \DB::table('events')->select(\DB::raw("*,DATE_FORMAT(start,'%d') AS single_date,DATE_FORMAT(endDate,'%b') AS single_month,DATE_FORMAT(start,'%d-%m-%Y') AS fromDate,DATE_FORMAT(endDate,'%d-%m-%Y') AS toDate"))
+	    
+	    $video = DB::table('videos')->first();
+
+	    $giftCards = DB::table('gift_cards')->get();
+
+
+	    $slides = DB::table('slider')->get();
+	    
+	    //dd($giftCards);
+	    $events = DB::table('events')->select(\DB::raw("*,DATE_FORMAT(start,'%d') AS single_date,DATE_FORMAT(endDate,'%b') AS single_month,DATE_FORMAT(start,'%d-%m-%Y') AS fromDate,DATE_FORMAT(endDate,'%d-%m-%Y') AS toDate"))
 	    ->orderBy('start', 'desc')->take(2)->get();
-		return \View::make('homepage')->with(array("just_registered" => $just_registered, "online" => $online, "events" => $events));
+		
+	   // / dd($video);
+		return View::make('homepage')->with(array("just_registered" => $just_registered, "online" => $online, "events" => $events,"video" => $video,'giftCards' => $giftCards,'slides' => $slides));
     	
     
 	}
 
     public function getLogin(){
     	
-	return \View::make('login');	
+    	if(Auth::check()){
+			
+			return Redirect::intended('/');
+		}	
+		else{
+			return \View::make('login');
+		}
     }
     
     public function postLogin(){
     	
     	$cred = array(
     			
-    			'username' => \Input::get('username'),
-    			'password' => \Input::get('password')
+    			'username' => Input::get('username'),
+    			'password' => Input::get('password')
     	);
         //dd($cred);
 		if(\Auth::attempt($cred)){
-    		return \Redirect::intended('/');
+
+			 $user_id = Auth::user() -> id;
+			 $date_time = Carbon::now();
+			 DB::table('user_online')->insert(
+			    ['user_id' => $user_id,'time' => $date_time]
+			);
+    		return Redirect::intended('/');
     	}else{
-    		return \Redirect::guest('login');
+    		return Redirect::guest('login');
     	}
 		
     	//$creds = array('username' => 'hasan' , 'password' => 'abc');
@@ -83,8 +109,10 @@ class HomeController extends Controller
     
     public function getLogout(){
     	
-    	\Auth::logout();
-    	return \Redirect::to('/');
+    	$user_id = Auth::user() -> id;
+    	Auth::logout();
+    	DB::table('user_online')->where('user_id', '=', $user_id)->delete();
+    	return Redirect::to('/');
     }
     
    

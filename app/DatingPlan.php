@@ -29,7 +29,7 @@ class DatingPlan extends Model implements AuthenticatableContract, CanResetPassw
      *
      * @var array
      */
-    protected $fillable = ['name', 'price', 'description'];
+    protected $fillable = ['name', 'type', 'noOfDay','price', 'discountPercentage', 'description'];
 
     /**
      * The attributes excluded from the model's JSON form.

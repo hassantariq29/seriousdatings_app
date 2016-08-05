@@ -67,15 +67,23 @@ class MyGroupController extends Controller
     public function store(Request $request)
     {
         
+        if(Input::file('photo') != null){
         
         $filname = Input::file('photo')->getClientOriginalName();
+        
         $imageName = Input::file('photo')->getClientOriginalExtension();
+
         $id = DB::table('user_groups')->insertGetId(
             ['user_id' => Input::get('userId'), 'group_name' => Input::get('groupName'), 'description' => Input::get('description'),'groupType' =>Input::get('groupType'), 'groupAdmin' => Input::get('userId'),'image' => $filname]   
         );
         Input::file('photo')->move(base_path() . '/public/images/groups/'.$id.'/', $filname);
 
         return redirect('groups/'.$id);
+    }
+    else{
+
+        return redirect('profile/groups/create');
+    }
     }
 
     /**
