@@ -86,9 +86,10 @@
   <div class="container">
   
   <div class="row">
-
-   @if($groups['0'] -> logged_in != 0)
-    @include('new_leftsidebar')
+  @if($groups != null)
+    @if($groups['0'] -> logged_in != 0)
+      @include('new_leftsidebar')
+    @endif
   @endif
     
     <div class="col-md-9" style="padding:0px">
@@ -100,44 +101,56 @@
     <div class="row">
     <div class="col-md-7">
     <h2> About Group</h2>
-    @if($groups['0'] -> groupType == "Public")
-        <p><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> &nbsp;&nbsp; Open Group</p>
-    @else
-         <p><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> &nbsp;&nbsp; Closed Group</p>
+    @if($groups != null)
+        @if($groups['0'] -> groupType == "Public")
+            <p><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> &nbsp;&nbsp; Open Group</p>
+        @else
+             <p><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> &nbsp;&nbsp; Closed Group</p>
+        @endif
     @endif
     <div class="row" style="margin-bottom: 2%;">
     <div class="col-md-4">
     <a href="#">
     <div class="grup_member">
     <div>
+    @if($groups != null)
         <img src="{!! url() !!}/images/groups/{!! $groups['0'] -> groupID !!}/{!! $groups['0'] -> image !!}" class="img-responsive" alt="group memberadmin image"/>
+    @endif
     </div>
     </div></a>
     </div>
     <div class="col-md-8">
-    <h4>Created By:</h4>
-    <p>{!! $groups['0'] -> groupAdmin !!}</p>
-    </div>
-    </div>
-    
-    <p><b>Group Name: </b> {!! $groups['0'] -> group_name !!}</p>
-    <p><b>Members in Group: </b>{!! count($groups) -1 !!}</p>
-        <p><b>Group Description: </b>{!! $groups['0'] -> description !!}</p>
-    </div>
-    <div class="col-md-5">
-    @if($groups['0'] -> logged_in != 0)
-  
-        @if($groups['0'] -> logged_in == $groups['0'] -> groupAdmin)
-            <a class="btn btn-default btn_link1" href="{!! url() !!}/groups/{!! $groups['0'] -> groupID !!}/addMember" role="button" id = "addMember"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Members</a>
-            <a class="btn btn-default btn_link1" href="{!! url() !!}/groups/{!! $groups['0'] -> groupID !!}/removeMember" role="button" id = "addMember"><span class="glyphicon glyphicon-plus"></span>&nbsp;Remove Members</a>
-            
-        @else
-            @if($groups['0'] -> joined == 0)
-                <a class="btn btn-default btn_link1" href="#" role="button" id ="joinNow"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Join Group</a>
-            @else
-                <a class="btn btn-default btn_link1" href="#" role="button" id ="unJoin"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Leave Group</a>
-            @endif
-        @endif
+    @if($groups != null)
+          <h4>Created By:</h4>
+          <p>{!! $groups['0'] -> groupAdmin !!}</p>
+          </div>
+          </div>
+          
+          <p><b>Group Name: </b> {!! $groups['0'] -> group_name !!}</p>
+          <p><b>Members in Group: </b>{!! count($groups) -1 !!}</p>
+              <p><b>Group Description: </b>{!! $groups['0'] -> description !!}</p>
+          </div>
+          <div class="col-md-5">
+          @if($groups['0'] -> logged_in != 0)
+        
+              @if($groups['0'] -> logged_in == $groups['0'] -> groupAdmin)
+                  <a class="btn btn-default btn_link1" href="{!! url() !!}/groups/{!! $groups['0'] -> groupID !!}/addMember" role="button" id = "addMember"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Members</a>
+                  <a class="btn btn-default btn_link1" href="{!! url() !!}/groups/{!! $groups['0'] -> groupID !!}/removeMember" role="button" id = "addMember"><span class="glyphicon glyphicon-plus"></span>&nbsp;Remove Members</a>
+                  
+              @else
+                  @if($groups['0'] -> joined == 0)
+                      <a class="btn btn-default btn_link1" href="#" role="button" id ="joinNow"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Join Group</a>
+                  @else
+                      <a class="btn btn-default btn_link1" href="#" role="button" id ="unJoin"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Leave Group</a>
+                  @endif
+              @endif
+          @endif
+    @else
+    <div class="row">
+          <div class="col-md-8">
+              <h3>Group Doesnot Exists</h3>
+          </div>
+     </div>
     @endif
 
     </div>
@@ -146,6 +159,7 @@
     <h3>Group Members</h3><br />
     
     <div class="row">
+    @if($groups != null)
       @if($groups['0'] -> id != null)
          @if($groups['0'] -> groupType == 'Public')
                 @foreach($groups as $group)
@@ -181,6 +195,7 @@
                 @endif
         @endif
      @endif
+    @endif
     </div>
     
    
@@ -214,7 +229,7 @@
             });
 
       
-
+        @if($groups != null)
 
          $('#unJoin').click(function () {
 
@@ -281,6 +296,7 @@
                 .fail(function() {
                 });
         });
+        @endif
 
       });
 </script>

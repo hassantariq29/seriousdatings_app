@@ -262,8 +262,14 @@ class MyGroupController extends Controller
             
             
         }
-        //dd($groups);
-        return View::make('addMember')->withGroups($groups);
+        if($groups != null){
+            return View::make('addMember')->withGroups($groups);
+        }
+        else{
+
+            return redirect(url().'/groups');
+        }
+
 
     }
     public function addMemberPost(Request $request){
@@ -307,13 +313,20 @@ public function removeMemberForm($id){
                      ->first();
           
           
-        
-            $group->membersToRemove = $members;
-            $group->logged_in = $logged_in;
+            if($group != null){
+                $group->membersToRemove = $members;
+                $group->logged_in = $logged_in;
+            }
         
         
          //dd($group);
-        return View::make('removeMember')->withGroup($group);
+            if($group != null){
+                return View::make('removeMember')->withGroup($group);
+            }
+            else{
+
+                return redirect(url().'/groups');
+            }
 
     }
     public function removeMemberPost(Request $request){

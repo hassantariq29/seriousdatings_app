@@ -98,7 +98,9 @@ class EventsController extends Controller
                          })
                      ->where('events.title', '=', $id)
                      ->get();
+        if($singleEvent != null){
         $eventId = $singleEvent['0'] -> id;
+
         $matchThese = ['user_id' => $logged_in, 'eventId' => $eventId]; 
         //dd($matchThese);       
          $eventCheck = DB::table('me_events')
@@ -107,30 +109,31 @@ class EventsController extends Controller
         $eventRegisterStatus = 0;
         if($eventCheck != null){
 
-            $eventRegisterStatus = 1;
-        }
-        else{
+                    $eventRegisterStatus = 1;
+                }
+                else{
 
-           $eventRegisterStatus = 0;
+                   $eventRegisterStatus = 0;
 
-        }
-        $role_user = DB::table('role_user')->where('user_id', $logged_in)->pluck('role_id');
-        $role_user_status = 0;
-        if($role_user != null){
-            if($role_user != 4){
-                $role_user_status = 1;
-            }
-            else{
-                $role_user_status = 2;
-            }
-        }
-        else{
+                }
+                $role_user = DB::table('role_user')->where('user_id', $logged_in)->pluck('role_id');
+                $role_user_status = 0;
+                if($role_user != null){
+                    if($role_user != 4){
+                        $role_user_status = 1;
+                    }
+                    else{
+                        $role_user_status = 2;
+                    }
+                }
+                else{
 
-            $role_user_status = 0;
+                    $role_user_status = 0;
+                }
+        
+                $singleEvent[0]->role_user_status = $role_user_status;
+                $singleEvent[0]->eventRegisterStatus = $eventRegisterStatus;
         }
-
-         $singleEvent[0]->role_user_status = $role_user_status;
-         $singleEvent[0]->eventRegisterStatus = $eventRegisterStatus;
          //dd($singleEvent);
          return View::make('eventsSingle')->withEvent($singleEvent);
 
@@ -178,16 +181,22 @@ class EventsController extends Controller
         ->leftJoin('eventType', 'events.eventType', '=', 'eventType.id')
         ->where('events.eventType', '=', $id)
         ->get();
-
+        if($events != null){
         $eventTypeString = $events['0'] -> name." Women ".$events['0'] -> ageFromFemale." - ".$events['0'] -> ageToFemale." / Men ".$events['0'] -> ageFromMale." - ".$events['0'] -> ageToMale;
 
         $encodedEvents = json_encode($events);
+        
 
         $data = array(
                         'events'           => $events,
                         'encodedEvents'    => $encodedEvents,
                         'eventTypeString'   =>$eventTypeString
                     );
+    }
+    else{
+
+        $data = array();
+    }
         //dd($data);
         //dd($data);
         return \View::make('eventsGroup')->withEvents($data);

@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use App\Compatability;
+use Auth;
+use Redirect;
 
 class CompatabilityController extends Controller
 {
@@ -13,6 +15,7 @@ class CompatabilityController extends Controller
 	
     public function getIndex($id)
     {
+        if(Auth::check()){
     	// First Generating List
     	$compat = new Compatability();
     	//$compat->generateCompatibles($id);
@@ -24,6 +27,10 @@ class CompatabilityController extends Controller
     
          
         return \View::make('compatability_slider')->with("data",$result);
+        }
+        else{
+            return redirect(url().'/login');
+        }
 
         
     }

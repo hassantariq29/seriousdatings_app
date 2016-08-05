@@ -77,9 +77,10 @@
   <div class="container">
   
   <div class="row">
-  
-  @if($groups['0'] -> logged_in != 0)
-    @include('new_leftsidebar')
+  @if($groups != null)
+    @if($groups['0'] -> logged_in != 0)
+      @include('new_leftsidebar')
+    @endif
   @endif
     
     <div class="col-md-9" style="padding:0px">
@@ -93,27 +94,37 @@
     <div class="col-md-7"><h2> Groups</h2> </div>
     
     <div class="col-md-5">
-      @if($groups['0'] -> logged_in != 0)
-        <a class="btn btn-default btn_link" href="{!! url() !!}/profile/groups/create" role="button">Create Group</a>
+    @if(Auth::check())
+      @if($groups != null)
+        @if($groups['0'] -> logged_in != 0)
+          <a class="btn btn-default btn_link" href="{!! url() !!}/profile/groups/create" role="button">Create Group</a>
+        @endif
+        @else
+         <a class="btn btn-default btn_link" href="{!! url() !!}/profile/groups/create" role="button">Create Group</a>
       @endif
+    @else
+        <a class="btn btn-default btn_link" href="{!! url() !!}/profile/groups/create" role="button">Create Group</a>
+    @endif
     </div>
     </div>
     
     <div class="row" style="margin-bottom: 2%;">
-    
-    @foreach($groups as $group)
-    <div class="col-md-3">
-        <a href="{!! url() !!}/groups/{!! $group -> id !!}">
-        <div class="grup_member">
-          <div>
-              <img src="{!! url() !!}/images/groups/{!! $group -> id !!}/{!! $group -> image !!}" alt="group memberadmin image" class="img-responsive" /> 
-              </div>
+    @if($groups != null)
+        @foreach($groups as $group)
+        <div class="col-md-3">
+            <a href="{!! url() !!}/groups/{!! $group -> id !!}">
+            <div class="grup_member">
+              <div>
+                  <img src="{!! url() !!}/images/groups/{!! $group -> id !!}/{!! $group -> image !!}" alt="group memberadmin image" class="img-responsive" /> 
+                  </div>
+            </div>
+           <div><p> <b>Group Name:</b>{!! $group -> group_name !!}</p></div> 
+            </a>
         </div>
-       <div><p> <b>Group Name:</b>{!! $group -> group_name !!}</p></div> 
-        </a>
-    </div>
-    @endforeach
-    
+        @endforeach
+    @else
+     <h4> No Groups Found </h4>
+    @endif
    
     </div>
     

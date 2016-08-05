@@ -27,11 +27,15 @@
         </div>
         <div class="age-grouph">
           <ul>
+            @if($events!= null)
             <li>
               <a href="#">
                 {!! $events["eventTypeString"]!!}
                 </a>
               </li>
+              @else
+              <li>  No Event Found </li>
+              @endif
           </ul>
         </div>
        
@@ -97,9 +101,14 @@
 <script>
 (function() {
 
-  var events = '{!! $events["encodedEvents"] !!}';
-  var json = $.parseJSON(events);
-  
+   @if($events != null)
+      var events = '{!! $events["encodedEvents"] !!}';
+      var json = $.parseJSON(events);
+  @else
+    var events = '';
+    var json = $.parseJSON(events);
+  @endif
+    
   var date = new Date();
   var d = date.getDate();
   var m = date.getMonth();

@@ -9,6 +9,7 @@ use Input;
 use Redirect;
 
 use Illuminate\Support\Facades\View;
+use Auth;
 
 
 class AboutYourDateController extends Controller
@@ -21,21 +22,27 @@ class AboutYourDateController extends Controller
      */
     public function index($id)
     {
-    	
-    	$zipcode = "0";
-    	$query = @unserialize(file_get_contents('http://ip-api.com/php/'));
-    	if($query && $query['status'] == 'success') {
-    		if(strlen($zipcode) < 1){
-    			$zipcode = "0";
-    		}
-    		else{
-    			$zipcode = $query['zip'];
-    		}
-    	}
-    	else{
-    		$zipcode = "0";
-    	}
-    	return \View::make('about_your_date')->with(array("id" => $id, "zipcode" => $zipcode));
+        if(Auth::user())
+    	{
+        	$zipcode = "0";
+        	$query = @unserialize(file_get_contents('http://ip-api.com/php/'));
+        	if($query && $query['status'] == 'success') {
+        		if(strlen($zipcode) < 1){
+        			$zipcode = "0";
+        		}
+        		else{
+        			$zipcode = $query['zip'];
+        		}
+        	}
+        	else{
+        		$zipcode = "0";
+        	}
+        	return \View::make('about_your_date')->with(array("id" => $id, "zipcode" => $zipcode));
+        }
+        else{
+
+            return redirect(url().'/login');
+        }
     	
    }
 	public function create()

@@ -25,10 +25,14 @@
     <div class="right-content-section">
       <div class="calendar-event-inner">
         <div class="calendar-event-title">
+          @if($event != null)
           <h2>{!! $event['0'] -> title !!} <small><span> @ </span>{!! $event['0'] -> eventLocation !!}</small></h2>
+          @else
+          @endif
         </div>
 
         <div class="ragister-content">
+        @if($event != null)
           @if($event['0'] -> role_user_status == 2)
             @if($event['0'] -> eventRegisterStatus == 0)
             {!! Form::open(
@@ -51,7 +55,9 @@
           <p>
             {!! $event['0'] -> desc !!}
           </p>
-
+          @else
+          <h4 style = "color:#e21d24;"> Event Doesnot Exists. </h4>
+          @endif
         </div>
         
         

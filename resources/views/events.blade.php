@@ -24,11 +24,15 @@
         </div>
         <div class="age-grouph">
           <ul>
+            @if(count($events['eventCategory']) > 1)
               @foreach($events["eventCategory"] as $event)
                 <li>
                   <a href="{!! url() !!}/events/category/{!! $event -> id !!}">{!! $event -> name!!} Women {!! $event -> ageFromFemale!!}-{!! $event -> ageToFemale!!} / Men {!! $event -> ageFromMale !!}-{!! $event -> ageToMale !!}</a>
                 </li>
               @endforeach
+            @else
+             <h4> No Event Found </h4>
+              @endif
           </ul>
         </div>
        

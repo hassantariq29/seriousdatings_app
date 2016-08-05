@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Mail;
 use DB;
+use Auth;
+use Redirect;
 class VerifyController extends Controller
 {
  
@@ -12,6 +14,7 @@ class VerifyController extends Controller
 	public function getIndex($id)
     {
     	
+        if(Auth::check()){
     	//dd(\Config::get("mail"));
     	$username = $id;
         $user_id = DB::table('users')->where('username',$id)->pluck('id');
@@ -37,6 +40,10 @@ class VerifyController extends Controller
 		
     	//Session::flush();
 		 return View::make('verify_email')->withData($data);
+        }
+        else{
+            return redirect(url().'/login');
+        }
 	
     }
     

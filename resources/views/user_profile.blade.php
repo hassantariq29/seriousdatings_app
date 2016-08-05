@@ -12,18 +12,21 @@
     <div class="inner-contendbg">
 
         <div class="row">
+          @if(Auth::check())
+                @if ($user -> role_user_status === 0)
 
-            @if ($user -> role_user_status === 0)
-
-                <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="subscribe">Subscribe</a> 
-            @elseif ($user -> friend_status == 1)
-                <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="removeFriendRequest">Remove Friend</a> 
-                <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="message">Message</a> 
-                <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="call">Call</a> 
-          @else
-                 <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="friendRequest">Send Friend Request</a> 
-         
-            @endif
+                    <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="subscribe">Subscribe</a> 
+                @elseif ($user -> friend_status == 1)
+                    <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="removeFriendRequest">Remove Friend</a> 
+                    <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="message">Message</a> 
+                    <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="call">Call</a> 
+              @else
+                     <a class="btn btn-default" href="#" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="friendRequest">Send Friend Request</a> 
+             
+                @endif
+         @else
+                  <a class="btn btn-default" href="{!! url() !!}/login" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;" id="login">Login To Access Services</a> 
+         @endif
            
           
         </div>

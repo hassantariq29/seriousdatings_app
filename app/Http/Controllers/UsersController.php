@@ -30,7 +30,7 @@ class UsersController extends Controller
 	    			return '0';
 	    		}
 	  	}
-        return View::make('user')->withusers(User::all());
+        return redirect(url());
     }
 
     public function create()
@@ -205,41 +205,42 @@ class UsersController extends Controller
 		//return \View::make('search')->withResults($results);
 		//return \View::make('search')->withUser($user);
 		$logged_in = 0;
-             if (Auth::check())
-            {
-                 $logged_in = Auth::user() -> id;
+            if (Auth::check())
+                {
+                     $logged_in = Auth::user() -> id;
+                
+            $current_user = User::where('username', $id)->first();
+            $user_id = $current_user -> id;
+            $role_user = DB::table('role_user')->where('user_id', $logged_in)->pluck('role_id');
+            if($role_user != 4){
+                $role_user_status = 0;
             }
-        $current_user = User::where('username', $id)->first();
-        $user_id = $current_user -> id;
-        $role_user = DB::table('role_user')->where('user_id', $logged_in)->pluck('role_id');
-        if($role_user != 4){
-            $role_user_status = 0;
-        }
-        else{
-            $role_user_status = 1;
-        }
-        
+            else{
+                $role_user_status = 1;
+            }
             
+                
 
-        $matchThese = ['user_id' => $logged_in, 'friend_id' => $user_id]; 
-        //dd($matchThese);       
-         $friend_user = DB::table('friends')
-            ->where( $matchThese)
-            ->pluck('id');
-        if($friend_user < 1){
+            $matchThese = ['user_id' => $logged_in, 'friend_id' => $user_id]; 
+            //dd($matchThese);       
+             $friend_user = DB::table('friends')
+                ->where( $matchThese)
+                ->pluck('id');
+            if($friend_user < 1){
 
-                  $friend_status = 0;
-      
-        }
-        else{
+                      $friend_status = 0;
+          
+            }
+            else{
 
-            $friend_status = 1;
-        }
+                $friend_status = 1;
+            }
 
-        $current_user->role_user_status = $role_user_status;
-        $current_user->friend_status = $friend_status;
-        $current_user->user_id = $logged_in;
-        $current_user->friend_id = $user_id;
+            $current_user->role_user_status = $role_user_status;
+            $current_user->friend_status = $friend_status;
+            $current_user->user_id = $logged_in;
+            $current_user->friend_id = $user_id;
+        
         
        // dd($current_user);
         //$current_user = User::findOrNew($id);
@@ -248,6 +249,11 @@ class UsersController extends Controller
 		//$all_users = User::all();
 
 		return View::make('user_profile')->withUser($current_user);
+        }
+        else{
+
+            return redirect(url().'/login');
+        }
 
     }
 
