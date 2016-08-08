@@ -53,7 +53,7 @@ class MyGroupController extends Controller
             }
             else{
 
-
+                return \View::make('login');
             }
         
     }

@@ -20,7 +20,7 @@ class EventManagementController extends Controller
      */
     public function index()
     {
-         $events = DB::table('events')
+         $events = DB::table('events')->select(\DB::raw("events.*,eventtype.*,events.id AS eventID"))
         ->leftJoin('eventtype', 'events.eventType', '=', 'eventType.id')
         ->get();
          return \View::make('admin.event.manage_event')->withEvents($events);
@@ -105,6 +105,16 @@ class EventManagementController extends Controller
     public function edit($id)
     {
         $event = Event::find($id);
+         $events = DB::table('events')->select(\DB::raw("events.*,eventtype.*,events.id AS eventID"))
+        ->leftJoin('eventtype', 'events.eventType', '=', 'eventType.id')
+        ->where('events.id','=',$id)
+        ->first();
+
+         $eventCategory = DB::table('eventtype')->get();
+
+         $event->eventCategory = $eventCategory;
+
+         //dd($event);
         return \View::make('admin.event.edit_event')->withEvent($event);
     }
 
@@ -126,7 +136,6 @@ class EventManagementController extends Controller
                 'toDate' => 'required',
                 'description' => 'required',
                 'price' => 'required',
-                'uploadpicture' => 'required'
                 );
                 $validator = \Validator::make(\Input::all(),$rules);
                 if($validator->fails())
@@ -134,20 +143,34 @@ class EventManagementController extends Controller
                     return \Redirect::to('admin/events/create')
                     ->withInput()
                     ->witherrors($validator->messages());
-                $filname = \Input::file('uploadpicture')->getClientOriginalName();
-                $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
 
-                $eventCategory = Input::get('eventCategory');
-                $title = Input::get('title');
-                $location = Input::get('location');
-                $fromDate = Input::get('fromDate');
-                $toDate = Input::get('toDate');
-                $description = Input::get('description');
-                $price = Input::get('price');
-                
-                DB::table('events')->insert(
-                    ['eventType' => $eventCategory, 'title' => $title, 'start' => $fromDate, 'endDate' => $toDate, 'evenLocation' => $location,'desc' => $description,'eventPrice' => $price,'image' => $filname]
-                );
+                    $eventCategory = Input::get('eventCategory');
+                    $title = Input::get('title');
+                    $location = Input::get('location');
+                    $fromDate = Input::get('fromDate');
+                    $toDate = Input::get('toDate');
+                    $description = Input::get('description');
+                    $price = Input::get('price');
+
+
+                if(Input::file('uploadpicture') != null)
+                {
+                    $filname = \Input::file('uploadpicture')->getClientOriginalName();
+                    $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
+                    Input::file('uploadpicture')->move(base_path() . '/public/images/events/', $filname);
+                   
+                    DB::table('events')
+                    ->where('id', $id)
+                    ->update(['eventType' => $eventCategory, 'title' => $title, 'start' => $fromDate, 'endDate' => $toDate, 'eventLocation' => $location,'desc' => $description,'eventPrice' => $price,'image' => $filname]
+                    );
+                }
+                else{
+                     DB::table('events')
+                    ->where('id', $id)
+                    ->update(['eventType' => $eventCategory, 'title' => $title, 'start' => $fromDate, 'endDate' => $toDate, 'eventLocation' => $location,'desc' => $description,'eventPrice' => $price]
+                    );
+
+                }
                  return redirect(url().'/admin/events');
                
     }
@@ -160,8 +183,10 @@ class EventManagementController extends Controller
      */
     public function destroy($id)
     {
+
+      // dd($id);
        $event = Event::find($id);
-        $event->delete();
+       $event->delete();
         // redirect
         \Session::flash('message', 'Successfully deleted the slide!');
         return \Redirect::to('admin/events');

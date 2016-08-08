@@ -19,7 +19,7 @@
   
     <!--Main content-->
     
-    @include('new_leftsidebar')
+        @include('new_leftsidebar')
     
     <div class="col-md-9" style="padding:0px">
     

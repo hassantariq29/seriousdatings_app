@@ -108,14 +108,16 @@ Route::controller('users/{username}/compatability','CompatabilityController');
 Route::controller('users/{username}/verify','VerifyController');
 Route::controller('users/{username}/photos','UserPublicPhotoController');
 Route::controller('users/{username}/videos','UserPublicVideoController');
-Route::controller('datingPlan/','DatingPlanController');
+Route::controller('profile/datingPlan/','DatingPlanController');
 
 
 Route::group(array('before' => 'profile'), function() {
 
 	Route::get('profile/logout', function(){
-		\Auth::logout();
-		\Session::flush();
+		$user_id = Auth::user() -> id;
+    	Auth::logout();
+    	DB::table('user_online')->where('user_id', '=', $user_id)->delete();
+    	\Session::flush();
 		return \Redirect::guest('/');
 
 	});
@@ -130,10 +132,12 @@ Route::group(array('before' => 'profile'), function() {
 
 Route::group(array('before' => 'admin'), function() {
 	Route::get('admin/logout', function(){
-		\Auth::logout();
-        \Session::flush();
-        return \Redirect::guest('login');
-		
+		$user_id = Auth::user() -> id;
+    	Auth::logout();
+    	DB::table('user_online')->where('user_id', '=', $user_id)->delete();
+    	\Session::flush();
+		return \Redirect::guest('/');
+      	
 	});
 	Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
 	Route::get('admin/change_password', 'ChangePasswordController@showForm');

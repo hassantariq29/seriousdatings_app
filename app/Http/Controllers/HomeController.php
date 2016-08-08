@@ -95,8 +95,16 @@ class HomeController extends Controller
 			 DB::table('user_online')->insert(
 			    ['user_id' => $user_id,'time' => $date_time]
 			);
-    		return Redirect::intended('/');
-    	}else{
+
+			 	$id = DB::table('role_user')->where('user_id','=',$user_id)->first();
+			  	if($id -> role_id == 2){
+			  		return redirect(url().'/admin');
+			  	}
+			  	else{
+    				return Redirect::intended('/');
+    			}
+    	}
+    	else{
     		return Redirect::guest('login');
     	}
 		
@@ -112,6 +120,7 @@ class HomeController extends Controller
     	$user_id = Auth::user() -> id;
     	Auth::logout();
     	DB::table('user_online')->where('user_id', '=', $user_id)->delete();
+    	//dd("logged out");
     	return Redirect::to('/');
     }
     

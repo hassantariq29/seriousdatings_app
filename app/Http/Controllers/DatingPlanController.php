@@ -16,17 +16,22 @@ class DatingPlanController extends Controller
 	
     public function getIndex()
     {
-    	
-    
-        $plans = DB::table('dating_plan')->get();
-        // return "Dating Plan";
-        $result  = array(
-            'current_user' => array(
+    	if (Auth::check())
+        {
+            $plans = DB::table('dating_plan')->get();
+            // return "Dating Plan";
+            $result  = array(
+                'current_user' => array(
                                 'username' => 'abc'
                                 ),
-            'plans'         => $plans 
-        );
-       return \View::make('datingPlan')->with("data",$result);
+                'plans'         => $plans 
+            );
+            return \View::make('datingPlan')->with("data",$result);
+        }
+        else{
+
+            return redirect(url().'/login');
+        }
 
         
     }

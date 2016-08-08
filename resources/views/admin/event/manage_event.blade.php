@@ -54,19 +54,19 @@
                         <div class="table-img">{!! HTML::image('images/events/'.$event->image, 'alt', array( 'class' => 'img-thumbnail img-responsive')) !!}
                         </div>
                     </td>
-                    <td>{!! $event -> name !!} </td>
+                    <td>{!! $event -> title !!} </td>
                     <td>{!! $event -> desc !!}</td>
                     <td><div class="table-description"><p>{!! $event -> eventLocation !!}</p></div></td>
 					          <td><div class="table-description"><p>{!! date('d F, Y', strtotime($event->start)) !!} <br/> To <br/> {!! date('d F, Y', strtotime($event->endDate)) !!}</p></div></td>
-					         <td><div class="table-description"><p>{!! $event -> title !!} </p></div></td>
+					         <td><div class="table-description"><p>{!! $event -> name !!} </p></div></td>
 					         <td><div class="table-description"><p>$ {!! $event -> eventPrice !!}</p></div></td>
 					
                     <td><div class="btn-group table-action"> <a class="btn btn-flickr btn-sm dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i> Action <span class="caret"></span> </a>
                         <ul role="menu" class="dropdown-menu">
                           
-                          <li><a href='events/{!! $event->id !!}/edit'> <i class="fa fa-pencil"></i> Edit</a></li>
+                          <li><a href='events/{!! $event->eventID !!}/edit'> <i class="fa fa-pencil"></i> Edit</a></li>
                           <li>
-                              {!! Form::open(array('url' => 'admin/events/' . $event->id, 'class' => '')) !!}
+                              {!! Form::open(array('url' => 'admin/events/' . $event->eventID, 'class' => '')) !!}
                                 {!! Form::hidden('_method', 'DELETE') !!}
                                 {!! Form::button('<i class="fa fa-trash-o"></i> Delete', array('type' => 'submit')) !!}
                              {!! Form::close() !!}

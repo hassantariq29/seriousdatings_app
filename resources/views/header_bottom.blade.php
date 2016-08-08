@@ -55,7 +55,7 @@
      
   <li><a href="#">Services</a>
     <ul class="hiddens">
-      <li><a href="{!! url() !!}/datingPlan">Dating Plans</a></li>
+      <li><a href="{!! url() !!}/profile/datingPlan">Dating Plans</a></li>
       <li><a href="#">Paid Services</a></li>
       <li><a href="#">Search Persons</a></li>
      <li><a href="#">Ready to Date</a></li>
