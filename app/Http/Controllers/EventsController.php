@@ -24,10 +24,10 @@ class EventsController extends Controller
         
 
         $events = DB::table('events')
-        ->leftJoin('eventtype', 'events.eventType', '=', 'eventType.id')
+        ->leftJoin('eventType', 'events.eventType', '=', 'eventType.id')
         ->get();
 
-         $eventCategory = DB::table('eventtype')->get();
+         $eventCategory = DB::table('eventType')->get();
 
         $encodedEvents = json_encode($events);
 
@@ -91,9 +91,9 @@ class EventsController extends Controller
                  $logged_in = Auth::user() -> id;
             }
         $singleEvent = DB::table('events')
-                     ->leftJoin('eventtype', function($join)
+                     ->leftJoin('eventType', function($join)
                          {
-                             $join->on('events.eventType', '=', 'eventtype.id');
+                             $join->on('events.eventType', '=', 'eventType.id');
                              
                          })
                      ->where('events.title', '=', $id)
@@ -178,7 +178,7 @@ class EventsController extends Controller
     {
         
         $events = DB::table('events')
-        ->leftJoin('eventtype', 'events.eventType', '=', 'eventType.id')
+        ->leftJoin('eventType', 'events.eventType', '=', 'eventType.id')
         ->where('events.eventType', '=', $id)
         ->get();
         if($events != null){

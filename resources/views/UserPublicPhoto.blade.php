@@ -37,7 +37,7 @@
 
 
     	  <div class="row">
-			<a class="btn btn-default" href="{!! url() !!}/users/{!! $data[0] -> username !!}" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;">Back</a> 
+			<a class="btn btn-default" href="{!! url() !!}/users/{!! $data['username'] !!}" role="button" style="color: #FFF; background: #E21D24;float: right;margin-bottom: 10px;">Back</a> 
 		  </div>
 
         <div class="container">
@@ -51,11 +51,11 @@
                     <div class="left-section">
 
                         <div class="quick-search">
-                            <center> <div class="profile_pic">{!! HTML::image('images/users/'.$data[0] -> username.'/'.$data[0] -> profile_pic,'alt_profile_pic',array( 'width' => '100%', 'height' => '100%' )) !!}</div></center>
+                            <center> <div class="profile_pic">{!! HTML::image('images/users/'.$data['username'].'/'.$data['profile_pic'],'alt_profile_pic',array( 'width' => '100%', 'height' => '100%' )) !!}</div></center>
                             <div class="prof_page">
                                 <ul>
-                                         <li><a href="{!! url() !!}/users/{!! $data[0] -> username !!}/photos">Pictures</a></li>
-                                         <li><a href="{!! url() !!}/users/{!! $data[0] -> username !!}/videos">Videos</a></li>
+                                         <li><a href="{!! url() !!}/users/{!! $data['username'] !!}/photos">Pictures</a></li>
+                                         <li><a href="{!! url() !!}/users/{!! $data['username'] !!}/videos">Videos</a></li>
                                      
                                 </ul>
                             </div>
@@ -83,11 +83,15 @@
 
 
                                     <div class="row pic_gallery">
-                                        @foreach($data as $photo)
+                                       @if(count($data['pictures']) > 0 )
+                                        @foreach($data['pictures'] as $photo)
                                         <div class="col-md-3">
-                                            {!! HTML::image('images/users/'.$photo -> username.'/pictures/'.$photo -> image,'Images',array( 'class' => 'jbox-img img-responsive')) !!}
+                                            {!! HTML::image('images/users/'.$data['username'].'/pictures/'.$photo -> image,'Images',array( 'class' => 'jbox-img img-responsive')) !!}
                                         </div>
                                         @endforeach
+@else
+<h4> No Pictures Found </h4>
+@endif
 
                                     </div>
 

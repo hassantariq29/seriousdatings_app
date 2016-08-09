@@ -1,11 +1,8 @@
-@extends('master')
-@section('login')
-    @include('login_form')
-@stop
-@section('container')
+@include('header_new')
 
-@stop
-@section('form_area')
+@include('header_bottom')
+</header>
+
     <style>
     select{
         display: block;
@@ -19,10 +16,21 @@
         width: 100%;
     }
 </style>
-    
-@if (Session::has('message'))
-   <div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
+<div class="middle inner-middle">
+    <div class="inner-header upcoming-banner">
+        <div class="container">
+            <h1><i class="calendar-event-icon"><img src="images/upcoming-event-icon.png"  alt=""></i>Create Group</h1>
+        </div>
+    </div>
+    <div class="inner-contendbg">
+
+            @if (Session::has('message'))
+               <div class="alert alert-info">{{ Session::get('message') }}</div>
+            @endif
+        <div class="container">
+
+            <div class="row">  
+
 {!! Form::open(
 array(
     'url' => 'groups',
@@ -72,12 +80,5 @@ array(
             </div>
 
 
-
-
-
-
-      
-
-
-@stop
-
+</div></div></div></div>
+@include('footer_new')

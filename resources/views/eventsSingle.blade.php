@@ -33,7 +33,7 @@
 
         <div class="ragister-content">
         @if($event != null)
-          @if($event['0'] -> role_user_status == 2)
+          @if($event['0'] -> role_user_status == 4 || $event['0'] -> role_user_status == 2)
             @if($event['0'] -> eventRegisterStatus == 0)
             {!! Form::open(
                           array(
@@ -49,6 +49,8 @@
             @else
                <h4 style = "color:#e21d24;"> You already registered to this event</h4>
             @endif
+          @else
+              <h4 style = "color:#e21d24;"> You are not subscribed to registered to this event</h4>
           @endif
           <br/>
           <h4 style = "color:#e21d24;"> FROM: {!! $event['0'] -> start !!} TILL: {!! $event['0'] -> endDate !!}</h4>

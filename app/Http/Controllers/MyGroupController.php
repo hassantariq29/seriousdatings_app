@@ -130,6 +130,12 @@ class MyGroupController extends Controller
             $group->logged_in = $logged_in;
             $group->joined = $joined;
             $group->groupID = $id;
+            if($group -> groupAdmin == $logged_in){
+                $group->admin= 1;
+            }
+            else{
+              $group->admin= 0;
+            }
             
         }
         //dd($groups);
@@ -263,7 +269,6 @@ class MyGroupController extends Controller
                      ->first();
             $group->user_info = $user_info;
             $group->logged_in = $logged_in;
-            $group->joined = $joined;
             $group->groupID = $id;
             $group->membersToAdd = $friends;
             $group->membersToAddCount = $membersToAddCount;

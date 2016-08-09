@@ -18,16 +18,18 @@ class UserPublicVideoController extends Controller
 
         $videos = DB::table('user_videos')->where('user_id',$user_id)->get();
         
-        foreach ($videos as $video) {
         
-         $video->username = $username;
-         $video->profile_pic = $profile_pic;
 
+$data = array(
+                        'videos' => $videos,
+                        'username' => $username,
+                         'profile_pic' => $profile_pic
+      
 
-        }
+                  );
        
        	//Session::flush();
-		 return View::make('UserPublicVideo')->withData($videos);
+		 return View::make('UserPublicVideo')->withData($data);
 	
     }
     

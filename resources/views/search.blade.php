@@ -76,7 +76,7 @@
                             <div class="col-md-4 card">
                                 <div class="card_up">
                                     <div class="up_left">
-                                        <a href="/seriousdatings_app/public/users/{!! $user['username'] !!}">
+                                        <a href="{!! url() !!}/users/{!! $user['username'] !!}">
                                             {!! HTML::image('images/users/'.$user["username"].'/'.$user["photo"],'alt_profile_pic',array( 'width' => '100%', 'height' => '100%' )) !!}
                                         </a>
                                     </div>

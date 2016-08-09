@@ -182,7 +182,7 @@
                 @if($groups['0'] -> membersToAddCount > 0 )
                   <input type="submit" value="Add Member(s)" class="common-red-btn button" />
                 @else
-                  <h3> All Friends are already added to this group. </h3>
+                  <h3> No Members To Add. </h3>
                 @endif
 
             {!! Form::close() !!}

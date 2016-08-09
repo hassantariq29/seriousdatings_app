@@ -67,39 +67,39 @@ class compatability extends Model implements AuthenticatableContract, CanResetPa
        foreach ($users as $user) {
              $count = 0;
            
-                if($user -> relationshipGoal == $about_your_date -> relationshipGoal){ $count++;}
-                if($user -> haveChildren == $about_your_date -> haveChildren){ $count++;}
-                if($user -> whatIsTheLongestRelationshipYouHaveBeenIn == $about_your_date -> whatIsTheLongestRelationshipYouHaveBeenIn){ $count++;}
-                if($user -> partnerDependability == $about_your_date -> partnerDependability){ $count++;}
-                if($user -> sexualCompatibility == $about_your_date -> sexualCompatibility){ $count++;}
-                if($user -> friendshipBetweenPartners == $about_your_date -> friendshipBetweenPartners){ $count++;}
-                if($user -> drugs == $about_your_date -> drugs){ $count++;}
-                if($user -> hairColor == $about_your_date -> hairColor){ $count++;}
-                if($user -> hairStyle == $about_your_date -> hairStyle){ $count++;}
-                if($user -> eyeColor == $about_your_date -> eyeColor){ $count++;}
-                if($user -> height == $about_your_date -> height){ $count++;}
-                if($user -> bodyType == $about_your_date -> bodyType){ $count++;}
-                if($user -> zodicSign == $about_your_date -> zodicSign){ $count++;}
-                if($user -> smoke == $about_your_date -> smoke){ $count++;}
-                if($user -> drink == $about_your_date -> drink){ $count++;}
-                if($user -> excercise == $about_your_date -> excercise){ $count++;}
-                if($user -> excerciseSchedule == $about_your_date -> excerciseSchedule){ $count++;}
-                if($user -> educationLevel == $about_your_date -> educationLevel){ $count++;}
-                if($user -> language == $about_your_date -> language){ $count++;}
-                if($user -> ethnicity == $about_your_date -> ethnicity){ $count++;}
-                if($user -> religiousBeliefs == $about_your_date -> religiousBeliefs){ $count++;}
-                if($user -> income == $about_your_date -> income){ $count++;}
-                if($user -> gender == $about_your_date -> gender){ $count++;}
-                if($user -> tatoos == $about_your_date -> tatoos){ $count++;}
-                if($user -> relationshipStatus == $about_your_date -> relationshipStatus){ $count++;}
-                if($user -> wantKids == $about_your_date -> wantKids){ $count++;}
-                if($user -> motherBorn == $about_your_date -> motherBorn){ $count++;}
-                if($user -> fatherBorn == $about_your_date -> fatherBorn){ $count++;}
+                if($user -> relationshipGoal == $about_your_date['relationshipGoal']){ $count++;}
+                if($user -> haveChildren == $about_your_date[' haveChildren']){ $count++;}
+                if($user -> whatIsTheLongestRelationshipYouHaveBeenIn == $about_your_date['whatIsTheLongestRelationshipYouHaveBeenIn']){ $count++;}
+                if($user -> partnerDependability == $about_your_date['partnerDependability']){ $count++;}
+                if($user -> sexualCompatibility == $about_your_date['sexualCompatibility']){ $count++;}
+                if($user -> friendshipBetweenPartners == $about_your_date['friendshipBetweenPartners']){ $count++;}
+                if($user -> drugs == $about_your_date['drugs']){ $count++;}
+                if($user -> hairColor == $about_your_date['hairColor']){ $count++;}
+                if($user -> hairStyle == $about_your_date['hairStyle']){ $count++;}
+                if($user -> eyeColor == $about_your_date['eyeColor']){ $count++;}
+                if($user -> height == $about_your_date['height']){ $count++;}
+                if($user -> bodyType == $about_your_date['bodyType']){ $count++;}
+                if($user -> zodicSign == $about_your_date['zodicSign']){ $count++;}
+                if($user -> smoke == $about_your_date['smoke']){ $count++;}
+                if($user -> drink == $about_your_date['drink']){ $count++;}
+                if($user -> excercise == $about_your_date['excercise']){ $count++;}
+                if($user -> excerciseSchedule == $about_your_date['excerciseSchedule']){ $count++;}
+                if($user -> educationLevel == $about_your_date['educationLevel']){ $count++;}
+                if($user -> language == $about_your_date['language']){ $count++;}
+                if($user -> ethnicity == $about_your_date['ethnicity']){ $count++;}
+                if($user -> religiousBeliefs == $about_your_date['religiousBeliefs']){ $count++;}
+                if($user -> income == $about_your_date['income']){ $count++;}
+                if($user -> gender == $about_your_date['gender']){ $count++;}
+                if($user -> tatoos == $about_your_date['tatoos']){ $count++;}
+                if($user -> relationshipStatus == $about_your_date['relationshipStatus']){ $count++;}
+                if($user -> wantKids == $about_your_date['wantKids']){ $count++;}
+                if($user -> motherBorn == $about_your_date['motherBorn']){ $count++;}
+                if($user -> fatherBorn == $about_your_date['fatherBorn']){ $count++;}
                 $compatability = new compatability();
-                $distance = $compatability -> haversineGreatCircleDistance($about_your_date -> latitude, $about_your_date -> longitude, $user -> latitude, $user -> longitude);
-                if($distance <= $about_your_date -> rangeOfMiles){$count++;}
-                //if($user -> rangeOfMiles == $about_your_date -> rangeOfMiles){ $count++;}
-                if($user -> age >= $about_your_date -> age_from && $user -> age <= $about_your_date -> age_to){ $count++;}
+                $distance = $compatability -> haversineGreatCircleDistance($about_your_date['latitude'], $about_your_date['longitude'], $user -> latitude, $user -> longitude);
+                if($distance <= $about_your_date['rangeOfMiles']){$count++;}
+                //if($user -> rangeOfMiles == $about_your_date['rangeOfMiles']){ $count++;}
+                if($user -> age >= $about_your_date['age_from'] && $user -> age <= $about_your_date['age_to']){ $count++;}
                 
                 $percentage = ($count*100) / 30;
                 DB::table('compatability')->insert(

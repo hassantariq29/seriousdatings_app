@@ -7,7 +7,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <meta name="csrf-token" content="{!!  csrf_token() !!}">
-<title>Serious Dating | Login</title>
+<title>Serious Dating | Forgot Password</title>
 <!-- Bootstrap Core CSS -->
 {!! HTML::style('css/bootstrap.css') !!}
 {!! HTML::style('css/admin-style.css') !!}
@@ -29,39 +29,27 @@
         <div class="login-logo">Serious Dating</div>
         <div class="login-panel">
           <div class="login-heading">
-            <h3>Sign in to your account</h3>
-            <p>Please enter your name and password to log in. </p>
+            <h3>Reset your Password </h3>
+            <p>Please enter your email to rest your password. </p>
           </div>
+          <h3 style="color:white"><strong>{!! $data !!}</strong></h3> 
 		  {!! Form::open(
 				array(
-					'url' => 'login',
+					'url' => url().'/forgotPassword',
 					'method' => 'post',
 					'role' => 'form',
 					'class' => 'form-login',
 					)) !!}
-          <div class="successHandler alert alert-success no-display alert-dismissible fade in">
-            <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
-            <strong>You have some form errors!</strong> Please check below. </div>
-          <div class="errorHandler alert alert-danger no-display alert-dismissible fade in">
-            <button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>
-            <strong>You have some form errors!</strong> Please check below. </div>
+          
         
             <fieldset>
               <div class="form-group"><span class="input-icon">
-                <input type="text" placeholder="Username" name="username" id="username" class="form-control" required>
+                <input type="text" placeholder="Email" name="email" id="email" class="form-control" required>
                 <i class="fa fa-user"></i> </span> </div>
-              <div class="form-group"> <span class="input-icon">
-                <input type="password" placeholder="password" name="password" id="password" class="form-control" required>
-                <i class="fa fa-lock"></i> </span> </div>
               <div class="clearfix ">
-                <div class="checkbox pull-left">
-                  <label>
-                    <input name="remember" type="checkbox" value="Remember Me">
-                    Remember Me </label>
-                </div>
-                <a class="Forgott" href="{!! url() !!}/forgotPassword"> Forgot Password ?</a> </div>
+                <a class="Forgott" href="{!! url() !!}/login"> Login </a> </div>
               <!-- Change this to a button or input when using this as a form -->
-              <input type="submit" value="Login" class="btn btn-success btn-block">
+              <input type="submit" value="Reset"  id = "reset" class="btn btn-success btn-block">
             </fieldset>
           {!! Form::close() !!}
           
@@ -82,6 +70,14 @@
 <script>
 jQuery(document).ready(function(){
 	//loginValidator.init();
+  @if($data != ""){
+
+      $(".form-group").hide();
+      $("#reset").hide();
+      $(".login-heading").hide();
+      
+  }
+  @endif
 });
 </script>
 </body>

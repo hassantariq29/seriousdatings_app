@@ -1,5 +1,4 @@
 
-
   @include('header_new')
   @include('header_bottom')
 
@@ -176,7 +175,7 @@
                     </div>
                 @endforeach
         @else
-                @if($groups['0'] -> joined == 1)
+                @if($groups['0'] -> joined == 1 || $groups['0'] -> admin == 1)
                     @foreach($groups as $group)
                         <div class="col-md-2">
                         <a href="{!! url() !!}/users/{!! $group -> user_info -> username !!}">

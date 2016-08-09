@@ -7,7 +7,7 @@ use DB;
 use Redirect;
 use Input;
 use View;
-use Carbon\carbon;
+
 class HomeController extends Controller
 {
  
@@ -91,12 +91,13 @@ class HomeController extends Controller
 		if(\Auth::attempt($cred)){
 
 			 $user_id = Auth::user() -> id;
-			 $date_time = Carbon::now();
+			 $date_time = date("Y-m-d h:i:sa");
 			 DB::table('user_online')->insert(
 			    ['user_id' => $user_id,'time' => $date_time]
 			);
 
 			 	$id = DB::table('role_user')->where('user_id','=',$user_id)->first();
+
 			  	if($id -> role_id == 2){
 			  		return redirect(url().'/admin');
 			  	}

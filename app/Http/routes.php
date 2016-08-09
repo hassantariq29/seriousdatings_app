@@ -13,7 +13,6 @@
 
 Route::get('users/{username}/verify/{key}', function ($username, $key) {
 	
-
   		$username_new = DB::table('users')->where('id',$username)->pluck('username');
 		$db_key = \DB::table('users')->where('id',$username)->pluck('verify_key');
 
@@ -84,14 +83,12 @@ Route::get('groups/{group_id}', 'MyGroupController@show');
 Route::get('profile/groups/create', 'MyGroupController@create');
 Route::get('groups/{groupID}/addMember', 'MyGroupController@addMemberForm');
 Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
+Route::get('forgotPassword', 'ForgotPasswordController@showForgetForm');
+Route::get('forgotPassword/{username}/{key}', 'ForgotPasswordController@showForgetFormWithKey');
 
+Route::post('updatePassword', 'ForgotPasswordController@forgetFormWithKeyPost');
+Route::post('forgotPassword', 'ForgotPasswordController@forgetFormPost');
 Route::post('groups/ajax/group', 'AjaxRequestController@updateGroupMember');
-/*
-Route::post('groups/ajax/group', function()
-{
-    return 'Success! ajax in laravel 5';
-});
-*/
 Route::post('groups', 'MyGroupController@store');
 Route::post('groups/{groupID}/addMember', 'MyGroupController@addMemberPost');
 Route::post('groups/{groupID}/removeMember', 'MyGroupController@removeMemberPost');

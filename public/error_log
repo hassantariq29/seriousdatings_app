@@ -1,1 +1,9 @@
 [17-Dec-2015 09:57:49 UTC] PHP Parse error:  syntax error, unexpected 'class' (T_CLASS), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home/seriousdatings/seriousdatings_app/public/index.php on line 50
+[08-Aug-2016 05:56:17 UTC] PHP Fatal error:  Class 'Carbon\carbon' not found in /home/seriousdatings/serious/seriousdatings_app/app/Http/Controllers/HomeController.php on line 94
+[08-Aug-2016 07:15:21 UTC] PHP Parse error:  syntax error, unexpected '']){ $count++;}' (T_CONSTANT_ENCAPSED_STRING) in /home/seriousdatings/serious/seriousdatings_app/app/Compatability.php on line 71
+[08-Aug-2016 07:16:18 UTC] PHP Parse error:  syntax error, unexpected 'longitude' (T_STRING), expecting ']' in /home/seriousdatings/serious/seriousdatings_app/app/Compatability.php on line 99
+[08-Aug-2016 07:17:53 UTC] PHP Parse error:  syntax error, unexpected 'rangeOfMiles' (T_STRING), expecting ']' in /home/seriousdatings/serious/seriousdatings_app/app/Compatability.php on line 101
+[08-Aug-2016 07:18:25 UTC] PHP Parse error:  syntax error, unexpected 'age_to' (T_STRING), expecting ']' in /home/seriousdatings/serious/seriousdatings_app/app/Compatability.php on line 102
+[08-Aug-2016 07:25:39 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/seriousdatings/serious/seriousdatings_app/app/Http/Controllers/VerifyController.php on line 54
+[08-Aug-2016 07:25:41 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/seriousdatings/serious/seriousdatings_app/app/Http/Controllers/VerifyController.php on line 54
+[08-Aug-2016 07:39:32 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement in the script in /home/seriousdatings/serious/seriousdatings_app/app/Http/Controllers/VerifyController.php on line 7

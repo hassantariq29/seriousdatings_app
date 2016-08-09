@@ -22,7 +22,7 @@
             </div>
             
             <div class="input-cols"> 
-             <a href="#" data-reveal-id="myModal" data-animation="fade">Forgot Password ? </a>
+             <a href="{!! url() !!}/forgotPassword"  data-animation="fade">Forgot Password ? </a>
             </div>
             
             <div class="input-cols" style="margin-left: 5%;">

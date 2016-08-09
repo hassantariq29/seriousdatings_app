@@ -18,7 +18,7 @@ class CompatabilityController extends Controller
         if(Auth::check()){
     	// First Generating List
     	$compat = new Compatability();
-    	//$compat->generateCompatibles($id);
+    	$compat->generateCompatibles($id);
     	// Getting List Of Compatibles From Model Class and Passing To View
     	$result = $compat->showCompatability($id);
     	 

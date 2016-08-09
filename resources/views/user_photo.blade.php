@@ -1,4 +1,3 @@
-
 @include('header_new')
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
@@ -39,8 +38,9 @@
         <div class="container">
 
             <div class="row">
-
+@if(Auth::check())
                 @include('new_leftsidebar')
+                @endif
 
                 <div class="col-md-6" style="padding:0px">
 
@@ -59,11 +59,15 @@
 
 
                                     <div class="row pic_gallery">
+                                         @if($data['photos'] != null)
                                         @foreach($data['photos'] as $photo)
                                         <div class="col-md-3">
                                             {!! HTML::image('images/users/'.$data['current_user']->username.'/pictures/'.$photo->image,'Images',array( 'class' => 'jbox-img img-responsive')) !!}
                                         </div>
                                         @endforeach
+@else
+<h4> No Picture Exists </h4>
+@endif
 
                                     </div>
 

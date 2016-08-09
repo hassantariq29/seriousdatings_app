@@ -1,11 +1,10 @@
 
-
 <div class="col-md-3" style="padding:0px">
 
     <div class="left-section">
 
         <div>
-            <a class="btn btn-default" href="{!! url() !!}/datingPlan" role="button" style="color: #FFF; background: #E21D24;font-weight: bold;font-size: 20px;width: 100%;">Choose your dating plan</a>
+            <a class="btn btn-default" href="{!! url() !!}/profile/datingPlan" role="button" style="color: #FFF; background: #E21D24;font-weight: bold;font-size: 20px;width: 100%;">Choose your dating plan</a>
         </div>
 
         <div class="quick-search">

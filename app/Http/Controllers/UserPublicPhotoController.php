@@ -18,16 +18,17 @@ class UserPublicPhotoController extends Controller
 
         $pictures = DB::table('user_pictures')->where('user_id',$user_id)->get();
         
-        foreach ($pictures as $picture) {
         
-         $picture->username = $username;
-         $picture->profile_pic = $profile_pic;
-
-
-        }
        
+         $data = array(
+                        'pictures' => $pictures,
+                        'username' => $username,
+                         'profile_pic' => $profile_pic
+      
+
+                  );
        	//Session::flush();
-		 return View::make('UserPublicPhoto')->withData($pictures);
+		 return View::make('UserPublicPhoto')->withData($data);
 	
     }
     
