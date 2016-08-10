@@ -54,14 +54,15 @@
           <div class="dating-plan-offer">
           @if($plan -> discountPercentage == 0)
             <h4>No comment required</h4>
-            <h1><span>${!! $plan -> price !!}</span><br/>
-              <small>/{!! $plan -> type !!}</small></h1>
-            <p>Today's charge:${!! $plan -> price * $plan -> noOfDay!!} *</p>
+            <h1><span>${!! round($plan -> price / $plan -> noOfDay,2) !!}</span><br/>
+              <small> / {!! $plan -> type !!}</small></h1>
+            <p>Today's charge:${!! round($plan -> price / $plan -> noOfDay,2) !!} / {!! $plan -> type !!} *</p>
             @else
               <h5>Save {!! $plan -> discountPercentage !!}%</h5>
-              <h1><span>${!! $plan -> price !!}</span><br/>
-              <small>/{!! $plan -> type !!}</small></h1>
-            <p>Today's charge:${!! $plan -> price * $plan -> noOfDay!!} *</p>
+              <h1><span>${!! round($plan -> price / $plan -> noOfDay,2) !!}</span><br/>
+              <small> / {!! $plan -> type !!}</small></h1>
+            <p>Today's charge:${!! $plan -> discountPrice !!} / {!! $plan -> type !!} *
+            </p>
             @endif
           </div>
           <div class="countinue-btn-outer"> <a href="{!! url() !!}/datingPlan/{!! $plan -> id !!}">Continue Plan</a> </div>

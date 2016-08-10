@@ -86,8 +86,10 @@ Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm'
 Route::get('forgotPassword', 'ForgotPasswordController@showForgetForm');
 Route::get('forgotPassword/{username}/{key}', 'ForgotPasswordController@showForgetFormWithKey');
 Route::get('datingPlan/{username}', 'DatingPlanController@subscribe');
+Route::get('datingPlan/{username}/cancel', 'DatingPlanController@cancel');
 
-
+Route::post('profile/datingPlan/succes', 'DatingPlanController@succes');
+Route::post('datingPlan/{username}/success', 'DatingPlanController@success');
 Route::post('updatePassword', 'ForgotPasswordController@forgetFormWithKeyPost');
 Route::post('forgotPassword', 'ForgotPasswordController@forgetFormPost');
 Route::post('groups/ajax/group', 'AjaxRequestController@updateGroupMember');
