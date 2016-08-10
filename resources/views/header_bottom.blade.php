@@ -11,7 +11,7 @@
       
       <div class="login_pagehead">
         @if(Auth::check())
-       <a href="#">Username or Email</a>
+       <a href="{!! url() !!}/users/{!! Auth::user() -> username !!} ">{!! Auth::user() -> firstName !!} {!! Auth::user() -> lastName !!}</a>
         <a href="{!! url() !!}/logout"><input type="button" value="Logout" class="button"/></a></span>
         @else
           @include('login_form')

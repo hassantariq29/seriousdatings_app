@@ -89,6 +89,14 @@
                     <option value="We are friends">We are friends</option>
                     <option value="I'm in a serious relationship">I'm in a serious relationship</option>
                     <option value="Sex Only">Sex Only</option>
+                    <option value="Engaged">Engaged</option>
+                    <option value="Married">Married</option>
+                    <option value="Is is complicated">It is complicated</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="In a domestic partnership">In a domestic partnership</option>
+                    <option value="In an open relationship">In an open relationship</option>
                 </select>
             </div>
         </div>
@@ -457,8 +465,6 @@ Also unassuming, the Pisces zodiac signs and meanings deal with acquiring vast a
                      <option value="Somewhat Important">Somewhat Important</option>
                     <option value="What every happen">What every happen</option>
                     <option value="Unsure">Unsure</option>
-                    <option value="2">23</option>
-                    <option value="2">24</option>
                 </select>
             </div>
         </div>

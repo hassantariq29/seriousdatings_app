@@ -82,19 +82,24 @@ class HomeController extends Controller
     
     public function postLogin(){
     	
+    	$remember = (Input::has('check')) ? true : false;
+    	
     	$cred = array(
     			
     			'username' => Input::get('username'),
     			'password' => Input::get('password')
     	);
         //dd($cred);
-		if(\Auth::attempt($cred)){
+		if(\Auth::attempt($cred,$remember)){
 
 			 $user_id = Auth::user() -> id;
 			 $date_time = date("Y-m-d h:i:sa");
-			 DB::table('user_online')->insert(
-			    ['user_id' => $user_id,'time' => $date_time]
-			);
+			 $userOnline = DB::table('user_online')->where('user_id', '=', $user_id)->first();
+			 if($userOnline == null){
+    		 	DB::table('user_online')->insert(
+				    ['user_id' => $user_id,'time' => $date_time]
+				);
+			}
 
 			 	$id = DB::table('role_user')->where('user_id','=',$user_id)->first();
 

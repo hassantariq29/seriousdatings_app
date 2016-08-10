@@ -30,8 +30,11 @@ input[type="checkbox"] + label span, input[type="checkbox"]:checked + label span
 {!! Form::open(
 array(
     'url' => 'users',
+    'name' => 'signupForm',
+    'id' => 'signupForm',
     'novalidate' => 'novalidate',
-    'files' => true)) !!}
+    'files' => true))
+     !!}
 
 <div class="row">
     <h3>Profile Picture:</h3>
@@ -126,14 +129,24 @@ array(
 
     <div class="three-cols">
         <label>What's your relationship status? </label>
-        <select name="relationshipStatus" class = "form-control" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="relationshipStatus" class = "form-control" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="In a relationship, but not working">In a relationship, but not working</option>
             <option value="Not sure">Not sure</option>
             <option value="Single">Single</option>
             <option value="We are friends">We are friends</option>
             <option value="I'm in a serious relationship">I'm in a serious relationship</option>
             <option value="Sex Only">Sex Only</option>
+            <option value="Engaged">Engaged</option>
+            <option value="Married">Married</option>
+            <option value="Is is complicated">It is complicated</option>
+            <option value="Widowed">Widowed</option>
+            <option value="Separated">Separated</option>
+            <option value="Divorced">Divorced</option>
+            <option value="In a domestic partnership">In a domestic partnership</option>
+            <option value="In an open relationship">In an open relationship</option>
+            
+            
         </select>
     </div>
 </div>
@@ -164,16 +177,16 @@ array(
 <div class="form-row single-line-label">
     <div class="three-cols">
         <label>Your Gender:</label>
-        <select name="gender" id="gender">
-            <option value="1">--Select--</option>
+        <select name="gender" id="gender" required>
+            <option value="">--Select--</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
         </select>
     </div>
     <div class="three-cols">
         <label>Do you have Tattoos?</label>
-        <select name="tatoos" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="tatoos" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
             <option value="Some">Some</option>
@@ -182,8 +195,8 @@ array(
 
     <div class="three-cols">
         <label>Does you want kids? </label>
-        <select name="wantKids" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="wantKids" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
             <option value="Maybe">Maybe</option>
@@ -196,8 +209,8 @@ array(
 
     <div class="three-cols">
         <label>Your Relatioship goal:</label>
-        <select name="relationshipGoal" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="relationshipGoal" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="long term relationship">Long Term Relationship</option>
             <option value="short term relationship">Short Term Relationship</option>
             <option value="to get married">To Get Married</option>
@@ -206,19 +219,38 @@ array(
     </div>
     <div class="three-cols">
         <label>Your Occupation:</label>
-        <select name="occupation" id="relation-ship">
-            <option value="1">--Select--</option>
-            <option value="2">21</option>
-            <option value="2">22</option>
-            <option value="2">23</option>
-            <option value="2">24</option>
+        <select name="occupation" id="relation-ship" required>
+            <option value="">--Select--</option>
+            <option value="Arts, Design, Entertainment, Sports, and Media">Arts, Design, Entertainment, Sports, and Media</option>
+            <option value="Healthcare Support">Healthcare Support</option>
+            <option value="Protective Service">Protective Service</option>
+            <option value="Office and Administrative Support">Office and Administrative Support</option>
+            <option value="Personal Care and Service">Personal Care and Service</option>
+            <option value="Community and Social Service">Community and Social Service</option>
+            <option value="Business and Financial Operations">Business and Financial Operations</option>
+            <option value="Construction and Extraction">Construction and Extraction</option>
+            <option value="Food Preparation and Serving Related">Food Preparation and Serving Related</option>
+            <option value="Management">Management</option>
+            <option value="Life, Physical, and Social Science">Life, Physical, and Social Science</option>
+            <option value="Farming, Fishing, and Forestry">Farming, Fishing, and Forestry</option>
+            <option value="Production">Production</option>
+            <option value="Computer and Mathematical">Computer and Mathematical</option>
+            <option value="Healthcare Practitioners and Technical">Healthcare Practitioners and Technical</option>
+            <option value="Sales and Related">Sales and Related</option>
+            <option value="Architecture and Engineering">Architecture and Engineering</option>
+            <option value="Legal">Legal</option>
+            <option value="Education, Training, and Library">Education, Training, and Library</option>
+            <option value="Installation, Maintenance, and Repair">Installation, Maintenance, and Repair</option>
+            <option value="Building and Grounds Cleaning and Maintenance">Building and Grounds Cleaning and Maintenance</option>
+            <option value="Transportation and Materials Moving">Transportation and Materials Moving</option>
+            <option value="Other">Other</option>
         </select>
     </div>
 
     <div class="three-cols">
         <label>Your Income:</label>
-        <select name="income" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="income" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Less than $5000">Less than $5000</option>
             <option value="1-5000">$1-$5000</option>
             <option value="5000-10000">$5000-$10,000</option>
@@ -306,16 +338,17 @@ array(
 <div class="form-row single-line-label ">
     <div class="three-cols">
         <label>Do you have children?</label>
-        <select name="haveChildren" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="haveChildren" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
         </select>
     </div>
     <div class="three-cols">
         <label>If You have many?</label>
-        <select name="howMany" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="howMany" id="relation-ship" required>
+            <option value="">--Select--</option>
+            <option value="1">1</option>
             <option value="2">2</option>
             <option value="2">3</option>
             <option value="2">4</option>
@@ -328,8 +361,8 @@ array(
 
     <div class="three-cols">
         <label>Do you own a car?</label>
-        <select name="doYouOwnACar" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="doYouOwnACar" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
         </select>
@@ -340,39 +373,26 @@ array(
 <div class="form-row four-col-row">
     <div class="four-cols">
         <label>Are you on any medication?</label>
-        <select name="areYouOnAnyMedication" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="areYouOnAnyMedication" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
         </select>
     </div>
     <div class="four-cols">
         <label>Would birth Father Is:</label>
-        <select name="fatherBorn" id="relation-ship">
-            <option value="1">--Select--</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-        </select>
+        <input type = "text" name="fatherBorn" placeholder = "Birth Father">
     </div>
     <div class="four-cols">
 
 
     <label>Would birth Mother Is:</label>
-        <select name="motherBorn" id="relation-ship">
-            <option value="1">--Select--</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-        </select>
-
+           <input type = "text"name="motherBorn" placeholder = "Birth Mother">
     </div>
     <div class="four-cols">
         <label>How ambitious are you?</label>
-        <select name="howAmbitiousAreYou" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="howAmbitiousAreYou" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Very Important">Very Important</option>
             <option value="Important">Important</option>
             <option value="Somewhat Important">Somewhat Important</option>
@@ -382,8 +402,8 @@ array(
 
     <div class="four-cols">
         <label>What is the longest relationship you have  been in?:</label>
-        <select name="whatIsTheLongestRelationshipYouHaveBeenIn" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="whatIsTheLongestRelationshipYouHaveBeenIn" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="1 year">1 Year</option>
             <option value="2 years">2 Years</option>
             <option value="3-6 years">3-6 Years</option>
@@ -392,35 +412,24 @@ array(
     </div>
 
 
-    <div class="four-cols">
-        <label>Your birth father and mother are:</label>
-        <select name="yourBirthFatherAndMotherAre" id="relation-ship">
-            <option value="1">--Select--</option>
-            <option value="2">21</option>
-            <option value="2">22</option>
-            <option value="2">23</option>
-            <option value="2">24</option>
-        </select>
-    </div>
+    
 
     <div class="four-cols">
         <label>How important in a relationship is my partner's dependability?</label>
-        <select name="partnerDependability" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="partnerDependability" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Very Important">Very Important</option>
             <option value="Somewhat Important">Somewhat Important</option>
             <option value="What every happen">What every happen</option>
             <option value="Unsure">Unsure</option>
-            <option value="2">23</option>
-            <option value="2">24</option>
         </select>
     </div>
 
 
     <div class="four-cols">
         <label>How important in a relationship is sexual compatibility</label>
-        <select name="sexualCompatibility" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="sexualCompatibility" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Sometime">Sometime</option>
             <option value="What is that">What is that</option>
             <option value="Very Important">Very Important</option>
@@ -430,8 +439,8 @@ array(
 
     <div class="four-cols">
         <label>How important in a relationship is the friendship between partners?</label>
-        <select name="friendshipBetweenPartners" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="friendshipBetweenPartners" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Very Important">Very Important</option>
             <option value="Important">Important</option>
             <option value="Somewhat Important">Somewhat Important</option>
@@ -440,8 +449,8 @@ array(
 
     <div class="four-cols">
         <label>Do you do drugs?</label>
-        <select name="drugs" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="drugs" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
             <option value="Sometime">Sometime</option>
@@ -451,8 +460,8 @@ array(
 
     <div class="four-cols">
         <label>What's your hair color?</label>
-        <select name="hairColor" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="hairColor" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Light Ash Blonde">Light Ash Blonde</option>
             <option value="Light Blonde">Light Blonde</option>
             <option value="Light Golden Blonde">Light Golden Blonde</option>
@@ -476,8 +485,8 @@ array(
 
     <div class="four-cols">
         <label>What's your hair style</label>
-        <select name="hairStyle" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="hairStyle" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Long">Long</option>
             <option value="Short">Short</option>
             <option value="Medium">Medium</option>
@@ -503,8 +512,8 @@ array(
 
     <div class="four-cols">
         <label>What's your eye color?</label>
-        <select name="eyeColor" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="eyeColor" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Hazel Eye ">Hazel Eye </option>
             <option value="Green Eye">Green Eye</option>
             <option value="Gray">Gray</option>
@@ -518,8 +527,8 @@ array(
 
     <div class="four-cols">
         <label>How tall are you?</label>
-        <select name="height" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="height" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="4ft">4ft</option>
             <option value="5ft">5ft</option>
             <option value="6ft">6ft</option>
@@ -529,8 +538,8 @@ array(
 
     <div class="four-cols">
         <label>What's your body type?</label>
-        <select name="bodyType" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="bodyType" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Definitive 'Hard Gainer'">Definitive "Hard Gainer"</option>
             <option value="Delicate Built Body">Delicate Built Body </option>
             <option value="Flat Chest">Flat Chest</option>
@@ -551,8 +560,8 @@ array(
 
     <div class="four-cols">
         <label>What's your zodic sign?</label>
-        <select name="zodicSign" id="zodic" >
-            <option value="0">--Select--</option>
+        <select name="zodicSign" id="zodic" required >
+            <option value="">--Select--</option>
             <option value="1">
                 Aries - The Ram
                 March 21 - April 19
@@ -631,8 +640,8 @@ array(
 
     <div class="four-cols">
         <label>Do you smoke?</label>
-        <select name="smoke" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="smoke" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
             <option value="Stopping">Stopping</option>
@@ -643,8 +652,8 @@ array(
 
     <div class="four-cols">
         <label>Do you drink?</label>
-        <select name="drink" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="drink" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
             <option value="Somtime">Sometime</option>
@@ -655,8 +664,8 @@ array(
 
     <div class="four-cols">
         <label>How often do you excercise?</label>
-        <select name="excercise" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="excercise" id="relation-ship" required >
+            <option value="">--Select--</option>
             <option value="regularly">Regularly</option>
             <option value="once a week">Once a week</option>
             <option value="five, three, two time a week">five, three, two time a week</option>
@@ -667,8 +676,8 @@ array(
 
     <div class="four-cols">
         <label>What excercise you do regularly</label>
-        <select name="excerciseSchedule" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="excerciseSchedule" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="chest">chest</option>
             <option value="shoulders">shoulders</option>
             <option value="triceps">triceps</option>
@@ -684,8 +693,8 @@ array(
 
     <div class="four-cols">
         <label>What's your education level?</label>
-        <select name="educationLevel" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="educationLevel" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Level 4- GED Certificate ">Level 4- GED Certificate </option>
             <option value="Level 5- High School Diploma ">Level 5- High School Diploma </option>
             <option value="Level 6- Bachelor's ">Level 6- Bachelor's </option>
@@ -698,8 +707,8 @@ array(
 
     <div class="four-cols">
         <label>What laguage do you speak?</label>
-        <select name="language" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="language" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Spanish">Spanish</option>
             <option value="English">English</option>
             <option value="Hindi">Hindi</option>
@@ -715,8 +724,8 @@ array(
 
     <div class="four-cols">
         <label>What is your ethnicity? </label>
-        <select name="ethnicity" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="ethnicity" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Hispanic or Latino ">Hispanic or Latino </option>
             <option value="Not Hispanic ">Not Hispanic </option>
             <option value="American Indian ">American Indian </option>
@@ -731,8 +740,8 @@ array(
 
     <div class="four-cols">
         <label>What are your religiouse you do beliefs? </label>
-        <select name="religiousBeliefs" id="relation-ship">
-            <option value="1">--Select--</option>
+        <select name="religiousBeliefs" id="relation-ship" required>
+            <option value="">--Select--</option>
             <option value="Christians">Christians</option>
             <option value="Muslims">Muslims</option>
             <option value="Hindus">Hindus</option>
@@ -952,10 +961,11 @@ array(
 
 
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-
+                $(function () {
+                     $("#signupForm").validate();
+                 });
                 document.getElementById("uploadBtn").onchange = function () {
                     document.getElementById("uploadFile").value = this.value;
                 }

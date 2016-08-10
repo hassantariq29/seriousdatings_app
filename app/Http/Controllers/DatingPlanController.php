@@ -35,6 +35,12 @@ class DatingPlanController extends Controller
 
         
     }
+
+    public function subscribe($planID){
+
+        $plan = DB::table('dating_plan')->where('id','=',$planID)->first();
+        dd($plan);
+    }
     
     
     	

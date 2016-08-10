@@ -64,7 +64,7 @@
             <p>Today's charge:${!! $plan -> price * $plan -> noOfDay!!} *</p>
             @endif
           </div>
-          <div class="countinue-btn-outer"> <a href="https://www.paypal.com/in/webapps/mpp/home">Continue Plan</a> </div>
+          <div class="countinue-btn-outer"> <a href="{!! url() !!}/datingPlan/{!! $plan -> id !!}">Continue Plan</a> </div>
         </div>
       </div>
       </div>

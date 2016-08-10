@@ -56,8 +56,44 @@ class UsersController extends Controller
     			'yourSocialSituation' => 'required',
     			'movies' => 'required',
     			'travel' => 'required',
-				'photoType' => 'required'
-    			);
+				'photoType' => 'required',
+                'photo' => 'required',
+                'relationshipStatus' => 'required',
+                'birthYear' => 'required',
+                'birthMonth' => 'required',
+                'birthDay' => 'required',
+                'gender' => 'required',
+                'tatoos' => 'required',
+                'wantKids' => 'required',
+                'relationshipGoal' => 'required',
+                'occupation' => 'required',
+                'income' => 'required',
+                'jobAndJobSchedule' => 'required',
+                'haveChildren' => 'required',
+                'doYouOwnACar' => 'required',
+                'fatherBorn' => 'required',
+                'areYouOnAnyMedication' => 'required',
+                'motherBorn' => 'required',
+                'howAmbitiousAreYou' => 'required',
+                'whatIsTheLongestRelationshipYouHaveBeenIn' => 'required',
+                'partnerDependability' => 'required',
+                'sexualCompatibility' => 'required',
+                'friendshipBetweenPartners' => 'required',
+                'drugs' => 'required',
+                'hairColor' => 'required',
+                'hairStyle' => 'required',
+                'eyeColor' => 'required',
+                'height' => 'required',
+                'bodyType' => 'required',
+                'zodicSign' => 'required',
+                'smoke' => 'required',
+                'drink' => 'required',
+                'excercise' => 'required',
+                'educationLevel' => 'required',
+                'language' => 'required',
+                'ethnicity' => 'required',
+                'religiousBeliefs' => 'required'
+                );
     	
     	$validator = \Validator::make(Input::all(),$rules);
     	if($validator->fails()) {
@@ -65,10 +101,12 @@ class UsersController extends Controller
 			
             \Session::flash('message', $validator->messages());
            // return \Redirect::back();
-    		
+    		/*
             return \Redirect::to('users/create')
     				->withInput()
     				->witherrors($validator->messages());
+                    */
+                    
                     
 			
 		}
@@ -113,6 +151,11 @@ class UsersController extends Controller
         $birthFrom = $birthYear."-".$birthMonth."-".$birthDay;
         $to   = new \DateTime('today');
         $age =  date_diff(date_create($birthFrom), date_create('today'))->y;
+        if($zipcode == ""){
+            $zipcode = "85054";
+        }
+       // dd($zipcode);
+       // dd($birthFrom);
 
         $user= User::create(array(
 		    'username'			=> Input::get('username'),
@@ -137,7 +180,7 @@ class UsersController extends Controller
 			'areYouOnAnyMedication' => Input::get('areYouOnAnyMedication'),
 			'howAmbitiousAreYou' 	=> Input::get('howAmbitiousAreYou'),
 			'whatIsTheLongestRelationshipYouHaveBeenIn' => Input::get('whatIsTheLongestRelationshipYouHaveBeenIn'),
-			'yourBirthFatherAndMotherAre' => Input::get('yourBirthFatherAndMotherAre'),
+			'yourBirthFatherAndMotherAre' => '',
 			'partnerDependability' => Input::get('partnerDependability'),
 			'sexualCompatibility' => Input::get('sexualCompatibility'),
 			'friendshipBetweenPartners' => Input::get('friendshipBetweenPartners'),
@@ -181,8 +224,15 @@ class UsersController extends Controller
         ['user_id' => $lastInsertedId, 'role_id' => 3]
         );
 
-    
-    	return \Redirect::to('users/'.Input::get('username').'/about_your_date')->with("verify_key",$email_key);
+        $cred = array(
+                
+                'username' => Input::get('username'),
+                'password' => Input::get('password')
+        );
+        //dd($cred);
+        if(\Auth::attempt($cred)){
+    	   return \Redirect::to('users/'.Input::get('username').'/about_your_date')->with("verify_key",$email_key);
+        }
         
         
         

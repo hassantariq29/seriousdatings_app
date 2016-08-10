@@ -85,6 +85,8 @@ Route::get('groups/{groupID}/addMember', 'MyGroupController@addMemberForm');
 Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
 Route::get('forgotPassword', 'ForgotPasswordController@showForgetForm');
 Route::get('forgotPassword/{username}/{key}', 'ForgotPasswordController@showForgetFormWithKey');
+Route::get('datingPlan/{username}', 'DatingPlanController@subscribe');
+
 
 Route::post('updatePassword', 'ForgotPasswordController@forgetFormWithKeyPost');
 Route::post('forgotPassword', 'ForgotPasswordController@forgetFormPost');
@@ -193,7 +195,7 @@ Route::filter('admin', function()
 			$user = Auth::user();
 			if (!$user->hasRole('Admin'))
 			{
-				return 'You donot have enough rights !!';
+				 return redirect(url());
 			}
            
         }

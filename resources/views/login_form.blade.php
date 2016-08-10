@@ -27,7 +27,7 @@
             
             <div class="input-cols" style="margin-left: 5%;">
             <a href="https://www.facebook.com/">
-              <img src="images/fb_signup.png" class="img-responsive" alt="group memberadmin image"/>
+              <img src="{!! url() !!}/images/fb_signup.png" class="img-responsive" alt="group memberadmin image" width = "100%"/>
             </a>
             </div>
             

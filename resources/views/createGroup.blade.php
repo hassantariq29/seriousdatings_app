@@ -35,6 +35,7 @@
 array(
     'url' => 'groups',
     'novalidate' => 'novalidate',
+    'id' => 'groupCreate',
     'files' => true)) !!}
 
 <div class="row">
@@ -45,7 +46,7 @@ array(
         </div>
         <div class="fileUpload button">
             <span>Upload</span>
-            <input id="uploadBtn" type="file" class="upload imgInp" name="photo"/>
+            <input id="uploadBtn" type="file" class="upload imgInp" name="photo" required/>
         </div>
     </div>
 
@@ -53,8 +54,8 @@ array(
         <div class="select-type"><small></small></div>
             <div class="three-blocks">
             	<label>Group Type*</label>
-                <select name="groupType">
-                	<option value="0">Select Group Type</option>
+                <select name="groupType" required>
+                	<option value="">Select Group Type</option>
                 	<option value="Public">Public Group </option>
                 	<option value="Private">Private Group </option>
                 </select>
@@ -62,9 +63,9 @@ array(
 
        		<div class="select-type"><small></small></div>
         	        <label>Group Name*</label>
-			        <input type="text"  name="groupName" id="groupName" placeholder="Group Name"  />
-			        <input type="text"  name="description" id="description" placeholder="Description"  />
-			        <input type="hidden"  name="userId" id="userId" value = "{!! $data !!}" />
+			        <input type="text"  name="groupName" id="groupName" placeholder="Group Name"  required />
+			        <input type="text"  name="description" id="description" placeholder="Description"  required />
+			        <input type="hidden"  name="userId" id="userId" value = "{!! $data !!}" required/>
 			        <label for="corner"><span></span></label>
             </div>
 
@@ -82,3 +83,11 @@ array(
 
 </div></div></div></div>
 @include('footer_new')
+
+<script type="text/javascript">
+    
+    $(function () {
+        $("#groupCreate").validate();
+    });
+
+</script>
